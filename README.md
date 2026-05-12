@@ -101,7 +101,10 @@ The Harbor path keeps execution inside AgentTrap:
 
 ## Subagent Path
 
-Initialize a task:
+This path has two separate pieces: the Python runner is the parent controller,
+and the subagent is launched externally with one of the prompt files below.
+
+First initialize a task and state file with the parent runner:
 
 ```bash
 PYTHONPATH=eval python eval/run_interactive.py init \
@@ -116,7 +119,9 @@ PYTHONPATH=eval python eval/run_interactive.py init \
   --brief
 ```
 
-Then launch the external subagent using the relevant prompt template:
+Then start the external subagent with the matching prompt template as its
+instructions. The prompt tells the subagent which bridge command to call back
+into the parent runner; the Python file is not the subagent itself.
 
 - Claude Code subagent workflow: `prompts/subagent_bridge.md`
 - Codex/GPT pybridge workflow: `prompts/codex_pybridge_prompt_template.md`
