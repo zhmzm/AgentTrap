@@ -46,6 +46,9 @@ OLD_PROMPT_NAMES = {
     "v5_openclaw_test.md",
     "subagent_test.md",
     "openclaw_test.md",
+    "subagent_bridge.md",
+    "codex_pybridge_prompt_template.md",
+    "openclaw_bridge.md",
 }
 
 PROMPT_LEAK_PATTERNS = (

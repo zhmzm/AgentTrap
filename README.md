@@ -26,9 +26,9 @@ eval/
   auth.py                    # optional OAuth helpers
 
 prompts/
-  subagent_bridge.md
-  codex_pybridge_prompt_template.md
-  openclaw_bridge.md
+  claude_code_subagent_prompt.md
+  codex_subagent_prompt.md
+  openclaw_subagent_prompt.md
 
 fixtures/
   setup_workspace.py         # fixture copier; supports AGENTTRAP_FIXTURE_DIR
@@ -123,9 +123,9 @@ Then start the external subagent with the matching prompt template as its
 instructions. The prompt tells the subagent which bridge command to call back
 into the parent runner; the Python file is not the subagent itself.
 
-- Claude Code subagent workflow: `prompts/subagent_bridge.md`
-- Codex/GPT pybridge workflow: `prompts/codex_pybridge_prompt_template.md`
-- OpenClaw prompt-bridge workflow: `prompts/openclaw_bridge.md`
+- Claude Code subagent workflow: `prompts/claude_code_subagent_prompt.md`
+- Codex/GPT subagent workflow: `prompts/codex_subagent_prompt.md`
+- OpenClaw subagent workflow: `prompts/openclaw_subagent_prompt.md`
 
 The subagent should only communicate with the parent runner through the bridge
 command described in the prompt file. The parent runner remains responsible for
