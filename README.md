@@ -45,6 +45,7 @@ sandbox/
 scripts/
   build_hf_release.py
   check_release.py
+  create_runner_bridge.py
   save_subagent_session.py
   save_codex_pybridge_session.py
   dump_subagent_session.py
@@ -117,6 +118,12 @@ PYTHONPATH=eval python eval/run_interactive.py init \
   --workspace-base results/workspaces_subagent_smoke \
   --model-tag subagent-smoke \
   --brief
+```
+
+Create the local bridge command used by the prompt:
+
+```bash
+python3 scripts/create_runner_bridge.py
 ```
 
 Then start the external subagent with the matching prompt template as its

@@ -61,8 +61,9 @@ except ImportError:
 
 def load_cases(cases_path: str) -> dict[int, dict]:
     """Load case registry indexed by case ID."""
-    cases = json.loads(Path(cases_path).read_text())
-    return {c["id"]: c for c in cases}
+    raw = json.loads(Path(cases_path).read_text())
+    cases = raw.get("cases", raw) if isinstance(raw, dict) else raw
+    return {int(c.get("id", c.get("case_id"))): c for c in cases}
 
 
 def get_track_a_cases(cases: dict[int, dict]) -> list[dict]:
@@ -85,7 +86,15 @@ def resolve_skill_src(skills_base: str, case: dict) -> Path:
     if legacy.exists():
         return legacy
 
-    case_id = case.get("id")
+    case_id = int(case.get("id", case.get("case_id")))
+    release = base / skill_type / f"case_{case_id:04d}_{variant_dir}"
+    if release.exists():
+        return release
+
+    release_matches = sorted(base.glob(f"*/case_{case_id:04d}_{variant_dir}"))
+    if release_matches:
+        return release_matches[0]
+
     clawhub_parent = base / "clawhub" / skill_type
     matches = sorted(clawhub_parent.glob(f"v5_case_{case_id}_*"))
     if matches:
@@ -191,10 +200,6 @@ def collect_workspace_data_mounts(workspace: Path) -> list[str]:
         "results",
         "cases",
         "skills",
-        # Root aliases to files already available under /workspace/skill.
-        "scripts",
-        "editing.md",
-        "pptxgenjs.md",
     }
     return [
         str(item)

@@ -83,8 +83,11 @@ def do_init(args: argparse.Namespace) -> dict:
     case = all_cases[case_id]
 
     # Read SKILL.md
-    skill_md_path = resolve_skill_src(skills_dir, case) / "SKILL.md"
-    skill_md = skill_md_path.read_text() if skill_md_path.exists() else ""
+    skill_src = resolve_skill_src(skills_dir, case)
+    skill_md_path = skill_src / "SKILL.md"
+    if not skill_md_path.exists():
+        return {"error": f"Skill not found for case {case_id}: {skill_md_path}"}
+    skill_md = skill_md_path.read_text()
 
     # Set up workspace
     workspace = setup_case_workspace(case, workspace_base, skills_dir)
@@ -99,8 +102,7 @@ def do_init(args: argparse.Namespace) -> dict:
 
     # Collect workspace data files and directories (items at workspace root that
     # aren't already handled by dedicated mounts like skill/ or home/)
-    _skip = {"skill", "home", "sentinel", "results", "cases", "skills",
-             "scripts", "editing.md", "pptxgenjs.md"}
+    _skip = {"skill", "home", "sentinel", "results", "cases", "skills"}
     data_files = [
         str(f) for f in workspace.iterdir()
         if f.name not in _skip and (f.is_file() or f.is_dir())

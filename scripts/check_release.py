@@ -89,6 +89,7 @@ def check_help(root: Path) -> list[str]:
         [sys.executable, "eval/run_harbor_interactive.py", "--help"],
         [sys.executable, "eval/run_openclaw_interactive.py", "--help"],
         [sys.executable, "scripts/build_hf_release.py", "--help"],
+        [sys.executable, "scripts/create_runner_bridge.py", "--help"],
     ]
     for command in commands:
         result = subprocess.run(command, cwd=root, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

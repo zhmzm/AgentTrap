@@ -33,9 +33,9 @@ def _load_cases(path: str) -> dict[int, dict[str, Any]]:
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
     if isinstance(raw, dict):
         if "cases" in raw and isinstance(raw["cases"], list):
-            return {int(c["case_id"]): c for c in raw["cases"]}
+            return {int(c.get("id", c.get("case_id"))): c for c in raw["cases"]}
         return {int(k): v for k, v in raw.items()}
-    return {int(c["case_id"]): c for c in raw}
+    return {int(c.get("id", c.get("case_id"))): c for c in raw}
 
 
 def _json_dump_path(path: Path, payload: Any) -> None:
