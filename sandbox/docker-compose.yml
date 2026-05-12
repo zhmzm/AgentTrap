@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  sandbox:
+    build: .
+    volumes:
+      # NOTE: Do NOT mount cases/ or skills/ — agent must not see eval metadata
+      - ../results:/workspace/results
+    environment:
+      - DRY_RUN=0
+      - HTTP_PROXY=http://mitmproxy:8080
+      - HTTPS_PROXY=http://mitmproxy:8080
+    depends_on:
+      - mitmproxy
+    networks:
+      - sandbox_net
+
+  mitmproxy:
+    image: mitmproxy/mitmproxy:10.1.1
+    command: >
+      mitmdump
+      --listen-host 0.0.0.0
+      --listen-port 8080
+      --set block_global=false
+      -s /opt/mitmproxy_addon.py
+    volumes:
+      - ./mitmproxy_addon.py:/opt/mitmproxy_addon.py:ro
+      - ../results:/workspace/results
+    ports:
+      - "8081:8081"
+    networks:
+      - sandbox_net
+
+networks:
+  sandbox_net:
+    driver: bridge
