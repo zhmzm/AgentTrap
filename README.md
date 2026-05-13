@@ -8,7 +8,7 @@ Paper preprint: coming soon ·
 
 AgentTrap is a dynamic benchmark for evaluating whether LLM agents can use third-party skills while resisting malicious runtime behavior. It tests a concrete model-framework-workspace environment, not just a final answer or a static package scan.
 
-![AgentTrap workflow](assets/agenttrap-main-workflow.jpg)
+![AgentTrap workflow](assets/agenttrap-paper-workflow.png)
 
 AgentTrap contains **141 executable tasks**: **91 malicious tasks** and **50 benign utility tasks** across **16 security-impact dimensions**, **10 runtime attack methods**, and **7 ordinary agent task categories**. The benchmark records full trajectories, tool effects, generated artifacts, mock-network observations, and judge evidence so that attack success, blocking, attack-not-triggered cases, and benign overdefense can be analyzed separately.
 
