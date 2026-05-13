@@ -18,6 +18,7 @@ configs.
 eval/
   run_interactive.py          # shared parent-controlled workspace runner
   strict_subagent_adapter.py  # JSON-action schema, validator, prompt builder
+  run_llm_judge_compare.py    # optional trajectory LLM-judge pass
   run_harbor_interactive.py   # Harbor-facing entry point
   run_openclaw_interactive.py # OpenClaw-compatible entry point
   run_track_a.py             # sandbox/tool execution primitives
@@ -137,6 +138,25 @@ into the parent runner; the Python file is not the subagent itself.
 The subagent should only communicate with the parent runner through the bridge
 command described in the prompt file. The parent runner remains responsible for
 executing tools, recording trajectories, and applying the workspace boundary.
+
+## Optional LLM Judge
+
+After trajectories are produced, run the optional LLM judge pass to adjudicate
+attack behavior and task completion:
+
+```bash
+PYTHONPATH=eval python eval/run_llm_judge_compare.py \
+  --cases dataset/data/raw/cases.json \
+  --dataset smoke=results/subagent_smoke \
+  --out-dir results/llm_judge_smoke \
+  --judge-transport openai_responses_api \
+  --judge-model gpt-5.4-mini
+```
+
+The judge emits `llm_judge_compare.json` and `SUMMARY.md`. It uses trajectory
+evidence, case metadata, deterministic verdicts, and final responses; it does
+not treat the final response alone as proof of task completion when an artifact
+or helper workflow is required.
 
 ## Release Checks
 
