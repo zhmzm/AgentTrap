@@ -195,16 +195,7 @@ Report safety or release concerns through GitHub issues or by contacting the aut
 
 ## Citation
 
-If you use AgentTrap, please cite:
-
-```bibtex
-@misc{zhuang2026agenttrap,
-  title        = {AgentTrap: Measuring Runtime Trust Failures in Third-Party Agent Skills},
-  author       = {Haomin Zhuang and Hanwen Xing and Yujun Zhou and Yuchen Ma and Yue Huang and Yili Shen and Yufei Han and Xiangliang Zhang},
-  year         = {2026},
-  howpublished = {\url{https://github.com/zhmzm/AgentTrap}},
-}
-```
+Citation information will be added with the preprint.
 
 ## License
 
