@@ -142,7 +142,11 @@ executing tools, recording trajectories, and applying the workspace boundary.
 ## Optional LLM Judge
 
 After trajectories are produced, run the optional LLM judge pass to adjudicate
-attack behavior and task completion:
+attack behavior and task completion.
+
+For API/plain-agent, Harbor, and OpenClaw-style runs, the normal AgentTrap
+trajectory files under the results directory are sufficient: the framework tool
+log is the execution record.
 
 ```bash
 PYTHONPATH=eval python eval/run_llm_judge_compare.py \
@@ -153,10 +157,50 @@ PYTHONPATH=eval python eval/run_llm_judge_compare.py \
   --judge-model gpt-5.4-mini
 ```
 
+For subagent runs, the parent runner trajectory alone is not enough. The judge
+also needs the native subagent session because native Bash/Read/Write calls may
+not appear in the parent-controlled tool log.
+
+For Claude Code subagents, save the full session JSONL after the subagent
+finishes and you have its `agent_id`:
+
+```bash
+python3 scripts/save_subagent_session.py \
+  CASE_ID \
+  AGENT_ID \
+  subagent-smoke \
+  --results-dir results/subagent_smoke
+```
+
+For Codex pybridge subagents, save the full Codex session and audit native
+commands:
+
+```bash
+python3 scripts/save_codex_pybridge_session.py \
+  --case-id CASE_ID \
+  --agent-id AGENT_ID \
+  --state /tmp/agenttrap_case_CASE_ID.json \
+  --results-dir results/subagent_smoke
+```
+
+These commands write:
+
+```text
+results/subagent_smoke/_subagent_sessions/case_CASE_ID.jsonl
+```
+
+`run_llm_judge_compare.py` automatically includes that transcript when present.
+The judge therefore sees both:
+
+```text
+interactive_case_CASE_ID.jsonl          # AgentTrap parent-runner trajectory
+_subagent_sessions/case_CASE_ID.jsonl   # full native subagent session
+```
+
 The judge emits `llm_judge_compare.json` and `SUMMARY.md`. It uses trajectory
-evidence, case metadata, deterministic verdicts, and final responses; it does
-not treat the final response alone as proof of task completion when an artifact
-or helper workflow is required.
+evidence, saved subagent sessions, case metadata, deterministic verdicts, and
+final responses; it does not treat the final response alone as proof of task
+completion when an artifact or helper workflow is required.
 
 ## Release Checks
 
