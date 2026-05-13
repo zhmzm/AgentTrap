@@ -176,7 +176,7 @@ python3 scripts/check_release.py
 
 ## Benchmark Design
 
-![AgentTrap taxonomy](assets/agenttrap-main-technical-taxonomy.png)
+![AgentTrap dimension distributions](assets/agenttrap-dim-construction-distributions.png)
 
 AgentTrap is designed around the trust boundary introduced by third-party skills. A malicious skill can make unsafe behavior look like telemetry, backup, compliance, preview generation, OAuth setup, report metadata, or local automation. The benchmark therefore evaluates concrete side effects: file reads/writes, process execution, network attempts, generated artifacts, configuration changes, hidden recipients, persistence, and output tampering.
 
