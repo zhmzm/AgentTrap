@@ -1,1 +1,1 @@
-{"verdict":null,"evidence":null,"confidence":null,"agent_turns":null,"terminated_by":null,"turns":[],"truncated_turns":false,"source_path":"results/sonnet_meta_judge_20260503/glm_judge.jsonl"}
+{"verdict":"ERROR","evidence":"'list' object has no attribute 'get'","confidence":0.0,"agent_turns":null,"terminated_by":null,"turns":[],"truncated_turns":false,"source_path":"results/v5_z_ai_glm_51_openrouter_casewise/glm_51_shard_A_track_a.jsonl"}
