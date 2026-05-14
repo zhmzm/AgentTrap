@@ -1,6 +1,6 @@
 # AgentTrap — Field Manual (website)
 
-A static site that browses the AgentTrap v6 benchmark: every case file,
+A static site that browses the AgentTrap benchmark: every case file,
 every model/framework run, every trajectory we captured.
 
 ## Layout
@@ -27,7 +27,7 @@ website_v2/
 python3 website_v2/scripts/build.py
 ```
 
-Reads `cases/cases_v6.json`, `results/model_case_matrix_v6.json`, and the
+Reads the canonical case spec, the case × run verdict matrix, and the
 matching `results/*/interactive_case_<N>.jsonl` trajectories. Writes
 `website_v2/data/`. Redacts API keys and `/Users/...` paths.
 

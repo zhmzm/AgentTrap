@@ -11,7 +11,7 @@
   document.getElementById('masthead-ts').textContent =
     ts ? ('Generated ' + ts.split('T')[0]) : '—';
   document.getElementById('imprint-line').textContent =
-    (summary.version || 'v6') + ' · ' + (ts.split('T')[0] || 'locally');
+    (ts.split('T')[0] || '—');
 
   // Hero stats (run count is paper roster).
   document.getElementById('m-cases').textContent = String(summary.cases);

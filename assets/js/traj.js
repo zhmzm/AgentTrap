@@ -20,7 +20,7 @@
   }
 
   document.title = `Trace · Case ${caseId} · ${runMeta ? runMeta.label : runId} · AgentTrap`;
-  document.getElementById('imprint-line').textContent = `v6 · case ${caseId} · ${runId}`;
+  document.getElementById('imprint-line').textContent = `Case ${caseId} · ${runId}`;
   document.getElementById('masthead-ts').textContent = `Trace · Nº${String(caseId).padStart(3,'0')}`;
 
   const v = traj.verdict || 'unknown';

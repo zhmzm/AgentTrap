@@ -6,7 +6,7 @@
   document.getElementById('masthead-ts').textContent =
     data.generatedAt ? ('Generated ' + data.generatedAt.split('T')[0]) : '—';
   document.getElementById('imprint-line').textContent =
-    (data.version || 'v6') + ' · ' + (data.generatedAt ? data.generatedAt.split('T')[0] : 'local');
+    (data.generatedAt ? data.generatedAt.split('T')[0] : '—');
 
   // Populate filters.
   const dims = [...new Set(cases.map(c => c.dim))].sort();

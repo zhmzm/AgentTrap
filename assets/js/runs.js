@@ -5,7 +5,7 @@
   document.getElementById('masthead-ts').textContent =
     data.generatedAt ? ('Generated ' + data.generatedAt.split('T')[0]) : '—';
   document.getElementById('imprint-line').textContent =
-    (data.version || 'v6') + ' · ' + (data.generatedAt ? data.generatedAt.split('T')[0] : 'local');
+    (data.generatedAt ? data.generatedAt.split('T')[0] : '—');
 
   const fFw = document.getElementById('f-framework');
   [...new Set(runs.map(r => r.framework))].sort().forEach(f => {

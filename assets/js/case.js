@@ -13,7 +13,7 @@
   }
 
   document.title = `Case Nº ${id} · ${detail.skill} · AgentTrap`;
-  document.getElementById('imprint-line').textContent = `v6 · case ${id}`;
+  document.getElementById('imprint-line').textContent = `Case ${id}`;
   document.getElementById('masthead-ts').textContent = `Case file Nº ${String(id).padStart(3,'0')}`;
 
   // Build verdict tally for header summary bar.

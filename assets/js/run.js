@@ -10,7 +10,7 @@
   catch (e) { root.innerHTML = `<div class="no-results">Run "${AT.escape(id)}" not found.</div>`; return; }
 
   document.title = `${run.label} · AgentTrap`;
-  document.getElementById('imprint-line').textContent = 'v6 · ' + id;
+  document.getElementById('imprint-line').textContent = id;
   document.getElementById('masthead-ts').textContent = id;
 
   const tally = run.tally || {};
