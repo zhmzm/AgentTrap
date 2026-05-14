@@ -27,13 +27,10 @@
 
   const head = `
     <div class="case-head rise d1">
-      <div>
-        <p class="serial">Case file</p>
-        <div class="number">№${String(id).padStart(3,'0')}</div>
-      </div>
-      <div>
+      <div class="title-block">
+        <p class="serial">Case file · Nº${String(id).padStart(3,'0')}</p>
         <h2 class="serif">${AT.escape(detail.skill)} <span class="muted" style="font-family:JetBrains Mono,monospace; font-size:14px;">· ${AT.escape(detail.variant)}</span></h2>
-        <p class="muted" style="font-family:JetBrains Mono,monospace; font-size:12px; margin-top:6px;">${AT.escape(detail.source)}</p>
+        <p class="source-line">${AT.escape(detail.source)}</p>
         <div class="tags">
           <span class="tag dim">${AT.escape(detail.dim.replace(/^DIM(\d+)_/, '$1 · '))}</span>
           <span class="tag modality">${AT.escape(detail.modality)}</span>
@@ -41,6 +38,9 @@
           ${(detail.mitre || []).map(t => `<span class="tag mitre">MITRE ${AT.escape(t)}</span>`).join('')}
           ${(detail.atlas || []).map(t => `<span class="tag atlas">ATLAS ${AT.escape(t)}</span>`).join('')}
         </div>
+      </div>
+      <div class="number-wrap">
+        <div class="number">Nº${String(id).padStart(3,'0')}</div>
       </div>
     </div>
 

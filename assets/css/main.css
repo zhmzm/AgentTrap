@@ -303,23 +303,30 @@ table.board td.right { text-align: right; }
 
 /* ---------- case detail ---------- */
 .case-head {
-  padding: 64px 0 32px;
+  padding: 56px 0 32px;
   display: grid;
-  grid-template-columns: minmax(0,1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 32px;
   align-items: end;
   border-bottom: var(--hairline);
 }
-.case-head .serial { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.22em; font-size: 12px; color: var(--ink-mute); }
+@media (max-width: 760px) {
+  .case-head { grid-template-columns: 1fr; gap: 16px; }
+  .case-head .number-wrap { order: -1; }
+}
+.case-head .serial { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.22em; font-size: 11px; color: var(--ink-mute); margin-bottom: 6px; }
 .case-head .number {
   font-family: 'Fraunces', serif;
-  font-size: clamp(120px, 20vw, 260px);
-  line-height: 0.85;
+  font-size: clamp(56px, 9vw, 120px);
+  line-height: 0.9;
   font-weight: 400;
-  font-variation-settings: 'SOFT' 100, 'opsz' 144;
-  letter-spacing: -0.05em;
+  font-variation-settings: 'SOFT' 100, 'opsz' 96;
+  letter-spacing: -0.04em;
+  text-align: right;
+  color: var(--ink-mute);
 }
-.case-head h2 { margin-top: 16px; max-width: 22ch; }
+.case-head .title-block h2 { font-size: clamp(28px, 4vw, 48px); max-width: 28ch; }
+.case-head .title-block .source-line { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-mute); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.12em; }
 .case-head .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
 .tags .tag {
   padding: 4px 10px;

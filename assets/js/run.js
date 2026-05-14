@@ -124,20 +124,24 @@
     else if (sort === 'dim') rows.sort((a,b) => a.dim.localeCompare(b.dim) || a.case - b.case);
 
     tbody.innerHTML = rows.map(c => {
-      const trajCell = c.trajectory
-        ? `<a class="open-btn" href="./traj.html?run=${encodeURIComponent(run.id)}&case=${c.case}">Trace →</a>`
-        : '<span class="no-traj">— no trace</span>';
+      const trajHref = c.trajectory
+        ? `./traj.html?run=${encodeURIComponent(run.id)}&case=${c.case}`
+        : null;
+      const caseLink = `<a href="./case.html?id=${c.case}" onclick="event.stopPropagation()" class="muted" style="font-family:JetBrains Mono,monospace; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid var(--rule-soft);">Case spec →</a>`;
       const intentTag = c.is_benign
         ? '<span class="benign-mark">benign</span>'
         : '<span class="benign-mark" style="color:var(--as); border-color:var(--as);">malicious</span>';
+      const rowClick = trajHref
+        ? `style="cursor:pointer;" onclick="location.href='${trajHref}'"`
+        : `style="cursor:default;"`;
       return `
-        <tr style="cursor:pointer;" onclick="location.href='./case.html?id=${c.case}'">
+        <tr ${rowClick}>
           <td><span style="font-family:'Fraunces',serif; font-size:24px; font-variation-settings:'SOFT' 80,'opsz' 60;">№${String(c.case).padStart(3,'0')}</span></td>
           <td class="muted">${AT.escape(c.dim.replace(/^DIM(\d+)_/, '$1 · '))}</td>
           <td>${AT.escape(c.skill)}</td>
           <td>${intentTag}</td>
           <td>${AT.pill(c.verdict, c.short)}</td>
-          <td class="right" onclick="event.stopPropagation()">${trajCell}</td>
+          <td class="right">${trajHref ? '<span style="font-family:JetBrains Mono,monospace; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase;">Trace →</span>' : '<span class="no-traj">— no trace</span>'} &nbsp; ${caseLink}</td>
         </tr>
       `;
     }).join('');
