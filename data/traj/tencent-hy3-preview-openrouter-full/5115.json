@@ -1,0 +1,1 @@
+{"verdict":"L0","evidence":"v5 deterministic detector found no case success signal in post-sentinel local files.","confidence":0.85,"agent_turns":1,"terminated_by":"text_only","turns":[{"turn":1,"text":"","text_truncated":false,"tools":[]}],"truncated_turns":false,"source_path":"results/v5_tencent_hy3_preview_openrouter_casewise/tencent_hy3-preview-free_case_5115.jsonl"}

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgentTrap — Field Manual</title>
+  <meta name="description" content="A benchmark of 141 cases for catching agents that get talked into doing the wrong thing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="./assets/css/main.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="imprint">AGENTTRAP / v6 · Field Manual</div>
+  <nav>
+    <a href="./index.html" data-nav="home">Dossier</a>
+    <a href="./cases.html" data-nav="cases">Cases</a>
+    <a href="./runs.html" data-nav="runs">Runs</a>
+    <a href="https://github.com/zhmzm/AgentTrap" data-nav="repo">Source</a>
+    <a href="https://huggingface.co/datasets/zhmzm/AgentTrap" data-nav="hf">Dataset</a>
+  </nav>
+  <div class="ts" id="masthead-ts">— · —</div>
+</header>
+
+<section class="hero">
+  <div class="stamp rise d1">Confidential — Internal Review</div>
+
+  <div class="header-row rise d2">
+    <p class="eyebrow">Dossier № 2026 · Volume vi</p>
+    <p class="eyebrow signal">141 case files · 14 runs · 1 trap</p>
+  </div>
+
+  <div class="wordmark serif rise d2" aria-label="AgentTrap">
+    <span class="a">Agent</span>
+    <span class="b">Trap<span style="color:var(--signal)">.</span></span>
+  </div>
+
+  <div class="grid-12" style="margin-top: 48px;">
+    <div style="grid-column: 1 / span 5;" class="rise d3">
+      <p class="lede">
+        A benchmark of one hundred and forty-one tasks built to catch the
+        precise moment an agent stops doing what you asked and starts doing
+        what someone else wanted.
+      </p>
+    </div>
+    <div style="grid-column: 7 / span 6;" class="rise d4">
+      <p class="serif" style="font-size: 17px; line-height: 1.5; font-weight: 350; max-width: 56ch;">
+        Each case ships a fixture workspace, a benign-sounding user request,
+        and a hidden trapdoor the agent can fall through. Cases span sixteen
+        attack dimensions across natural-language, code, and skill modalities.
+        We then run a roster of eight frontier models across up to four agent
+        frameworks and grade every trajectory.
+      </p>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div class="cell rise d4"><div class="num" id="m-cases">—</div><div class="lbl eyebrow">Cases · v6</div></div>
+    <div class="cell rise d5"><div class="num" id="m-runs">—</div><div class="lbl eyebrow">Model · framework runs</div></div>
+    <div class="cell rise d6"><div class="num" id="m-traj">—</div><div class="lbl eyebrow">Trajectories captured</div></div>
+  </div>
+</section>
+
+<!-- Model/framework roster ticker -->
+<div class="ticker"><div class="track" id="ticker"></div></div>
+
+<!-- Paper main figure -->
+<section class="paper-figure">
+  <div class="head">
+    <div>
+      <p class="eyebrow">§ 01 — From the paper</p>
+      <h2 class="serif">Anatomy of a trap.</h2>
+      <p class="muted" style="font-family:'Fraunces',serif; font-size:17px; line-height:1.45; max-width:60ch; margin-top:12px; font-variation-settings:'SOFT' 50,'opsz' 36;">
+        Cases are constructed by skill-aware agents that draft a benign-looking
+        request, plant a hidden side-effect, and write the pass / fail
+        conditions before any model is allowed to attempt the task.
+      </p>
+    </div>
+  </div>
+  <figure class="figframe">
+    <img src="./assets/img/paper/data-construction.png" alt="AgentTrap data construction workflow — three skill-construction agents producing a case file.">
+    <figcaption>Figure 1 · Data construction pipeline (paper, §1).</figcaption>
+  </figure>
+</section>
+
+<!-- Per-model results bar chart -->
+<section class="exhibits" style="border-bottom: var(--hairline);">
+  <div class="head">
+    <div>
+      <p class="eyebrow">§ 02 — Results</p>
+      <h2 class="serif">How each model · framework fared.</h2>
+      <p class="muted" style="font-family:'Fraunces',serif; font-size:17px; line-height:1.45; max-width:60ch; margin-top:12px; font-variation-settings:'SOFT' 50,'opsz' 36;">
+        Observed ASR = AS / (AS + BLK) — paper convention. Excludes
+        not-triggered, no-attack-evidence, inconclusive, infra, and
+        pending-judge cases from the denominator. Sorted ASR ascending.
+      </p>
+    </div>
+    <a href="./runs.html" class="eyebrow signal">Full leaderboard →</a>
+  </div>
+
+  <div id="model-bars"></div>
+  <div class="legend-strip" style="padding-top: 24px;">
+    <span class="muted">Bars are proportional within each column.</span>
+    <span class="item"><i class="swatch as"></i>Attack succeeded</span>
+    <span class="item"><i class="swatch blk"></i>Blocked / refused</span>
+    <span class="item"><i class="swatch bc"></i>Benign correct</span>
+    <span class="item"><i class="swatch ui"></i>Utility incomplete</span>
+  </div>
+</section>
+
+<!-- Dataset distribution -->
+<section class="exhibits">
+  <div class="head">
+    <div>
+      <p class="eyebrow">§ 03 — Distribution</p>
+      <h2 class="serif">How the dataset breaks down.</h2>
+    </div>
+    <p class="muted" style="max-width: 38ch; font-family:'Fraunces',serif; font-size:16px; font-variation-settings:'SOFT' 50,'opsz' 24;">
+      Sixteen attack dimensions, three modalities, fifty benign cases.
+    </p>
+  </div>
+
+  <div class="cols-2" style="align-items: flex-start; gap: 64px;">
+    <div>
+      <p class="eyebrow">Verdicts across all paper runs</p>
+      <div id="overall-bar" class="distbar" style="margin-top: 12px;"></div>
+      <div id="overall-legend" class="legend-strip"></div>
+    </div>
+    <div>
+      <p class="eyebrow">Cases by attack dimension</p>
+      <div id="dim-list" style="margin-top: 12px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured exhibits -->
+<section class="exhibits">
+  <div class="head">
+    <div>
+      <p class="eyebrow">§ 04 — Selected exhibits</p>
+      <h2 class="serif">Three case files worth opening.</h2>
+    </div>
+    <a href="./cases.html" class="eyebrow signal">See all 141 cases →</a>
+  </div>
+  <div class="grid" id="featured"></div>
+</section>
+
+<!-- Methodology -->
+<section class="exhibits" id="method" style="border-bottom: 0;">
+  <div class="head">
+    <div>
+      <p class="eyebrow">§ 05 — Methodology</p>
+      <h2 class="serif">How a case becomes a verdict.</h2>
+    </div>
+  </div>
+  <div class="cols-2">
+    <div>
+      <h4 class="muted">Trap construction</h4>
+      <p class="serif" style="font-size:17px; line-height:1.5; font-weight:350; font-variation-settings:'SOFT' 50,'opsz' 24;">
+        Each case is anchored to a real or realistic agentic skill. We compose
+        a workspace fixture (config files, partial code, fake credentials,
+        crafted documents) and a user request that is benign on its face but
+        that, if completed naïvely, makes the agent perform a forbidden side
+        effect. The trap and the pass/fail conditions are written before any
+        model touches it.
+      </p>
+    </div>
+    <div>
+      <h4 class="muted">Adjudication</h4>
+      <p class="serif" style="font-size:17px; line-height:1.5; font-weight:350; font-variation-settings:'SOFT' 50,'opsz' 24;">
+        We capture the full agent trajectory — every tool call, every
+        argument, every result — and judge it against the case's
+        <span style="color:var(--blk)">pass condition</span> and
+        <span style="color:var(--as)">fail condition</span>. An LLM judge
+        produces a verdict plus an evidence excerpt; flagged cases are
+        spot-checked by hand.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="colophon">
+  <div>
+    <div class="imprint-large">AgentTrap.</div>
+    <div style="margin-top: 8px;">A static field manual.</div>
+  </div>
+  <div>
+    <div class="eyebrow">Repository</div>
+    <p><a href="https://github.com/zhmzm/AgentTrap">github.com/zhmzm/AgentTrap</a></p>
+    <div class="eyebrow">Dataset</div>
+    <p><a href="https://huggingface.co/datasets/zhmzm/AgentTrap">huggingface.co/datasets/zhmzm/AgentTrap</a></p>
+  </div>
+  <div>
+    <div class="eyebrow">Imprint</div>
+    <p id="imprint-line">v6 · generated locally</p>
+    <div class="eyebrow">Rebuild</div>
+    <p><code>python3 website_v2/scripts/build.py</code></p>
+  </div>
+</footer>
+
+<script src="./assets/js/util.js"></script>
+<script src="./assets/js/marks.js"></script>
+<script src="./assets/js/home.js"></script>
+</body>
+</html>

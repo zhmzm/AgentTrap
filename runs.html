@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Runs · AgentTrap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="./assets/css/main.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="imprint">AGENTTRAP / v6 · Field Manual</div>
+  <nav>
+    <a href="./index.html" data-nav="home">Dossier</a>
+    <a href="./cases.html" data-nav="cases">Cases</a>
+    <a href="./runs.html" data-nav="runs">Runs</a>
+    <a href="https://github.com/zhmzm/AgentTrap" data-nav="repo">Source</a>
+    <a href="https://huggingface.co/datasets/zhmzm/AgentTrap" data-nav="hf">Dataset</a>
+  </nav>
+  <div class="ts" id="masthead-ts">— · —</div>
+</header>
+
+<section class="wrap" style="padding-top: 56px;">
+  <p class="eyebrow rise d1">§ Roster</p>
+  <h1 class="serif rise d2" style="font-size: clamp(48px, 8vw, 120px); letter-spacing:-0.03em; margin-top:12px;">Runs.</h1>
+  <p class="lede rise d3" style="margin-top:24px;">
+    Every model · framework combination we put through the dataset, ranked
+    by attack-success rate.
+  </p>
+
+  <div class="toolbar rise d4" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+    <div class="field">
+      <label class="label">Search</label>
+      <input id="q" type="search" placeholder="model, framework, source id…">
+    </div>
+    <div class="field">
+      <label class="label">Framework</label>
+      <select id="f-framework"><option value="">Any</option></select>
+    </div>
+    <div class="field">
+      <label class="label">Min cases scored</label>
+      <select id="f-scored">
+        <option value="0">Show all</option>
+        <option value="50">≥ 50</option>
+        <option value="100" selected>≥ 100 (full runs)</option>
+        <option value="130">≥ 130</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="label">Sort</label>
+      <select id="f-sort">
+        <option value="asr-asc">Lowest ASR (safest)</option>
+        <option value="asr-desc">Highest ASR</option>
+        <option value="blk-desc">Most blocked</option>
+        <option value="bc-desc">Best benign accuracy</option>
+        <option value="ui-desc">Most utility incomplete</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="legend-strip" style="padding-bottom:0;">
+    <span class="muted">Observed ASR = AS / (AS + BLK). Excluded: not-triggered, no-attack-evidence, inconclusive, infra-issue, pending-judge.</span>
+  </div>
+
+  <table class="runs-table" id="runs">
+    <thead>
+      <tr>
+        <th style="width: 44px;">Rank</th>
+        <th>Run</th>
+        <th>Model</th>
+        <th>Framework</th>
+        <th class="rate">Denom</th>
+        <th class="barcol">ASR ↓</th>
+        <th class="barcol">Blocked</th>
+        <th class="barcol">Benign correct</th>
+        <th class="rate right">UI</th>
+        <th class="right">Open</th>
+      </tr>
+    </thead>
+    <tbody id="runs-body"></tbody>
+  </table>
+  <p class="muted" id="count" style="font-family:JetBrains Mono,monospace; font-size:11px; padding: 16px 0 64px;">—</p>
+</section>
+
+<footer class="colophon">
+  <div>
+    <div class="imprint-large">AgentTrap.</div>
+    <div style="margin-top: 8px;">A static field manual.</div>
+  </div>
+  <div>
+    <div class="eyebrow">Repository</div>
+    <p><a href="https://github.com/zhmzm/AgentTrap">github.com/zhmzm/AgentTrap</a></p>
+    <div class="eyebrow">Dataset</div>
+    <p><a href="https://huggingface.co/datasets/zhmzm/AgentTrap">huggingface.co/datasets/zhmzm/AgentTrap</a></p>
+  </div>
+  <div>
+    <div class="eyebrow">Imprint</div>
+    <p id="imprint-line">v6</p>
+  </div>
+</footer>
+
+<script src="./assets/js/util.js"></script>
+<script src="./assets/js/runs.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cases · AgentTrap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="./assets/css/main.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="imprint">AGENTTRAP / v6 · Field Manual</div>
+  <nav>
+    <a href="./index.html" data-nav="home">Dossier</a>
+    <a href="./cases.html" data-nav="cases">Cases</a>
+    <a href="./runs.html" data-nav="runs">Runs</a>
+    <a href="https://github.com/zhmzm/AgentTrap" data-nav="repo">Source</a>
+    <a href="https://huggingface.co/datasets/zhmzm/AgentTrap" data-nav="hf">Dataset</a>
+  </nav>
+  <div class="ts" id="masthead-ts">— · —</div>
+</header>
+
+<section class="wrap" style="padding-top: 56px;">
+  <p class="eyebrow rise d1">§ Catalog</p>
+  <h1 class="serif rise d2" style="font-size: clamp(48px, 8vw, 120px); letter-spacing: -0.03em; margin-top: 12px;">Cases.</h1>
+  <p class="lede rise d3" style="margin-top: 24px;">
+    One hundred and forty-one entries. Filter, search, then open any file to
+    see how every model handled it.
+  </p>
+
+  <div class="toolbar rise d4">
+    <div class="field">
+      <label class="label">Search</label>
+      <input id="q" type="search" placeholder="skill, plan, variant, dim…">
+    </div>
+    <div class="field">
+      <label class="label">Dimension</label>
+      <select id="f-dim"><option value="">Any</option></select>
+    </div>
+    <div class="field">
+      <label class="label">Modality</label>
+      <select id="f-mod"><option value="">Any</option></select>
+    </div>
+    <div class="field">
+      <label class="label">Intent</label>
+      <select id="f-intent">
+        <option value="">Any</option>
+        <option value="malicious">Malicious</option>
+        <option value="benign">Benign</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="label">Verdict signal</label>
+      <select id="f-verdict">
+        <option value="">Any</option>
+        <option value="AS">Attack succeeded (any run)</option>
+        <option value="BLK">Attack blocked (any run)</option>
+        <option value="BFP">Benign false positive</option>
+        <option value="UI">Utility incomplete</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="label">Sort</label>
+      <select id="f-sort">
+        <option value="id">Case number</option>
+        <option value="as">Most attacks succeeded</option>
+        <option value="blk">Most attacks blocked</option>
+        <option value="skill">Skill (A→Z)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="legend-strip">
+    <span class="muted">Each cell = one of the 12 paper model · framework runs.</span>
+    <span class="item"><i class="swatch as"></i>AS attack succeeded</span>
+    <span class="item"><i class="swatch blk"></i>BLK blocked</span>
+    <span class="item"><i class="swatch bc"></i>BC benign correct</span>
+    <span class="item"><i class="swatch bfp"></i>BFP false positive</span>
+    <span class="item"><i class="swatch ui"></i>UI incomplete</span>
+    <span class="item"><i class="swatch ant"></i>ANT not triggered</span>
+    <span class="item"><i class="swatch inf"></i>INF infra</span>
+    <span class="item"><i class="swatch pj"></i>PJ pending</span>
+    <span class="item"><i class="swatch miss"></i>— missing</span>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="case-list" id="case-list"></div>
+  <p class="muted" style="font-family:JetBrains Mono,monospace; font-size:11px; padding-bottom: 64px;" id="count-line">—</p>
+</section>
+
+<footer class="colophon">
+  <div>
+    <div class="imprint-large">AgentTrap.</div>
+    <div style="margin-top: 8px;">A static field manual.</div>
+  </div>
+  <div>
+    <div class="eyebrow">Repository</div>
+    <p><a href="https://github.com/zhmzm/AgentTrap">github.com/zhmzm/AgentTrap</a></p>
+    <div class="eyebrow">Dataset</div>
+    <p><a href="https://huggingface.co/datasets/zhmzm/AgentTrap">huggingface.co/datasets/zhmzm/AgentTrap</a></p>
+  </div>
+  <div>
+    <div class="eyebrow">Imprint</div>
+    <p id="imprint-line">v6</p>
+  </div>
+</footer>
+
+<script src="./assets/js/util.js"></script>
+<script src="./assets/js/cases.js"></script>
+</body>
+</html>
