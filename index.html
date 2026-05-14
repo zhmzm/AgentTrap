@@ -36,6 +36,13 @@
     <span class="b">Trap<span style="color:var(--signal)">.</span></span>
   </div>
 
+  <nav class="hero-cta rise d3" aria-label="Primary entry points">
+    <a href="./cases.html" class="cta">Browse 141 cases <span class="arr">→</span></a>
+    <a href="./runs.html" class="cta">Leaderboard <span class="arr">→</span></a>
+    <a href="#method" class="cta">Methodology <span class="arr">↓</span></a>
+    <a href="https://github.com/zhmzm/AgentTrap" class="cta">Paper (soon) <span class="arr">↗</span></a>
+  </nav>
+
   <div class="grid-12" style="margin-top: 48px;">
     <div style="grid-column: 1 / span 5;" class="rise d3">
       <p class="lede">
@@ -84,11 +91,36 @@
   </figure>
 </section>
 
+<!-- Safety × Capability scatter -->
+<section class="exhibits" style="border-bottom: var(--hairline);">
+  <div class="head">
+    <div>
+      <p class="eyebrow">§ 02 — Safety × Capability</p>
+      <h2 class="serif">Which model · framework lands in the safe corner.</h2>
+      <p class="muted" style="font-family:'Fraunces',serif; font-size:17px; line-height:1.45; max-width:60ch; margin-top:12px; font-variation-settings:'SOFT' 50,'opsz' 36;">
+        Defense rate (1 − observed ASR) plotted against benign accuracy. The
+        upper-right quadrant is the one you want — capable on real tasks,
+        unmoved by the trap. A complement to the §03 leaderboard below;
+        each dot links to its run dossier.
+      </p>
+    </div>
+  </div>
+
+  <div class="scatter-wrap">
+    <svg id="scatter-svg" role="img" aria-label="Safety vs capability scatter plot"></svg>
+    <div id="scatter-tip"></div>
+    <div class="scatter-foot">
+      <span>x · benign accuracy &nbsp; y · defense rate (1 − ASR)</span>
+      <span><span class="star">★</span> capable &amp; safe quadrant</span>
+    </div>
+  </div>
+</section>
+
 <!-- Per-model results bar chart -->
 <section class="exhibits" style="border-bottom: var(--hairline);">
   <div class="head">
     <div>
-      <p class="eyebrow">§ 02 — Results</p>
+      <p class="eyebrow">§ 03 — Results table</p>
       <h2 class="serif">How each model · framework fared.</h2>
       <p class="muted" style="font-family:'Fraunces',serif; font-size:17px; line-height:1.45; max-width:60ch; margin-top:12px; font-variation-settings:'SOFT' 50,'opsz' 36;">
         Observed ASR = AS / (AS + BLK) — paper convention. Excludes
@@ -113,7 +145,7 @@
 <section class="exhibits">
   <div class="head">
     <div>
-      <p class="eyebrow">§ 03 — Distribution</p>
+      <p class="eyebrow">§ 04 — Distribution</p>
       <h2 class="serif">How the dataset breaks down.</h2>
     </div>
     <p class="muted" style="max-width: 38ch; font-family:'Fraunces',serif; font-size:16px; font-variation-settings:'SOFT' 50,'opsz' 24;">
@@ -138,7 +170,7 @@
 <section class="exhibits">
   <div class="head">
     <div>
-      <p class="eyebrow">§ 04 — Selected exhibits</p>
+      <p class="eyebrow">§ 05 — Selected exhibits</p>
       <h2 class="serif">Three case files worth opening.</h2>
     </div>
     <a href="./cases.html" class="eyebrow signal">See all 141 cases →</a>
@@ -150,7 +182,7 @@
 <section class="exhibits" id="method" style="border-bottom: 0;">
   <div class="head">
     <div>
-      <p class="eyebrow">§ 05 — Methodology</p>
+      <p class="eyebrow">§ 06 — Methodology</p>
       <h2 class="serif">How a case becomes a verdict.</h2>
     </div>
   </div>
@@ -201,6 +233,7 @@
 
 <script src="./assets/js/util.js"></script>
 <script src="./assets/js/marks.js"></script>
+<script src="./assets/js/scatter.js"></script>
 <script src="./assets/js/home.js"></script>
 </body>
 </html>

@@ -140,6 +140,69 @@ hr { border: 0; border-top: var(--hairline); margin: 0; }
   background: var(--paper);
 }
 
+/* ---------- run leaderboard badges ---------- */
+.run-badge {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 8px 1px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  vertical-align: middle;
+  transform: translateY(-3px);
+}
+.run-badge.champion { color: var(--bc); border: 1px solid var(--bc); }
+.run-badge.worst    { color: var(--as); border: 1px solid var(--as); }
+.runs-table tr.flag-champion .runname { color: var(--bc); }
+.runs-table tr.flag-worst .runname    { color: var(--as); }
+.runs-table tr.flag-champion td:first-child::before {
+  content: '★';
+  display: inline-block;
+  width: 14px;
+  margin-right: 4px;
+  color: var(--bc);
+  font-family: 'Fraunces', serif;
+}
+
+/* ---------- hero CTAs ---------- */
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
+}
+.hero-cta .cta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 11px 18px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  transition: background .12s ease, color .12s ease, transform .12s ease;
+}
+.hero-cta .cta:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+.hero-cta .cta:hover .arr { color: var(--paper); }
+.hero-cta .cta .arr {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--signal);
+}
+
 /* ---------- featured exhibits ---------- */
 .exhibits { padding: 64px 32px; border-bottom: var(--hairline); }
 .exhibits .head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; gap: 24px; }
@@ -714,3 +777,90 @@ table.board td.right { text-align: right; }
 .spacer { height: 64px; }
 .spacer-sm { height: 24px; }
 .no-results { padding: 64px 0; text-align: center; font-family: 'Fraunces', serif; font-size: 20px; color: var(--ink-mute); }
+
+/* ---------- safety x capability scatter ---------- */
+.scatter-wrap {
+  position: relative;
+  border: var(--hairline);
+  background: var(--paper-light);
+  padding: 24px 24px 16px;
+  margin-top: 8px;
+}
+.scatter-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.scatter-wrap .sp { transition: opacity .5s ease; }
+.scatter-wrap #scatter-tip {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  min-width: 200px;
+  z-index: 5;
+  transition: opacity .12s ease;
+}
+.scatter-wrap #scatter-tip .sp-h {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-variation-settings: 'SOFT' 50, 'opsz' 36;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.scatter-wrap #scatter-tip .sp-fw {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.scatter-wrap #scatter-tip .sp-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  color: var(--ink-mute);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+.scatter-wrap #scatter-tip .sp-row b {
+  color: var(--ink);
+  font-weight: 600;
+  font-feature-settings: 'tnum';
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 12px;
+}
+.scatter-wrap .scatter-foot {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-mute);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--rule-soft);
+  padding-top: 12px;
+  margin-top: 12px;
+}
+.scatter-wrap .scatter-foot .star { color: var(--bc); }
+
+/* ---------- dim list link hover ---------- */
+a.dim-row-link {
+  text-decoration: none;
+  color: inherit;
+  transition: color .12s ease, background .12s ease;
+}
+a.dim-row-link:hover { color: var(--signal); }
+a.dim-row-link:hover .dim-bar i { background: var(--signal); }

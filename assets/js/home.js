@@ -68,8 +68,9 @@
   const maxDim = Math.max(...dims.map(d => d[1]));
   dims.forEach(([dim, n]) => {
     const w = (n / maxDim) * 100;
-    const row = document.createElement('div');
-    row.className = 'dim-row';
+    const row = document.createElement('a');
+    row.className = 'dim-row dim-row-link';
+    row.href = './dim.html?id=' + encodeURIComponent(dim);
     row.innerHTML = `
       <span>${AT.escape(dim.replace(/^DIM(\d+)_/, '$1 · '))}</span>
       <span class="dim-bar"><i style="width:${w}%"></i></span>

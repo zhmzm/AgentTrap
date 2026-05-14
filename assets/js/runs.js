@@ -54,17 +54,29 @@
     }[sort];
     rows.sort(cmp);
 
+    // Champion / Worst flags — based on the full scored roster, not the
+    // filtered view, so badges remain stable as filters change.
+    const scoredRuns = runs.filter(r => !r.data_pending && r.asr != null);
+    const champion = scoredRuns.reduce((b, r) => (b == null || r.asr < b.asr ? r : b), null);
+    const worst    = scoredRuns.reduce((b, r) => (b == null || r.asr > b.asr ? r : b), null);
+    const flagFor  = r =>
+      !r || r.data_pending ? null
+      : r === champion ? 'champion'
+      : r === worst    ? 'worst'
+      : null;
+
     body.innerHTML = '';
     if (rows.length === 0) {
       body.innerHTML = '<tr><td colspan="10" class="no-results" style="padding: 64px 0;">No runs match those filters.</td></tr>';
     } else {
-      rows.forEach((r, i) => body.appendChild(renderRow(r, i + 1)));
+      rows.forEach((r, i) => body.appendChild(renderRow(r, i + 1, flagFor(r))));
     }
     count.textContent = rows.length + ' / ' + runs.length + ' runs shown';
   }
 
-  function renderRow(r, rank) {
+  function renderRow(r, rank, flag) {
     const tr = document.createElement('tr');
+    if (flag) tr.classList.add('flag-' + flag);
     if (r.data_pending) {
       tr.style.opacity = 0.5;
       tr.style.cursor = 'default';
@@ -81,10 +93,15 @@
     }
     tr.addEventListener('click', () => window.location.href = './run.html?id=' + encodeURIComponent(r.id));
     const hasSec = r.asr != null;
+    const badge = flag === 'champion'
+      ? '<span class="run-badge champion">★ Champion</span>'
+      : flag === 'worst'
+      ? '<span class="run-badge worst">Worst</span>'
+      : '';
     tr.innerHTML = `
       <td><span class="rank">${String(rank).padStart(2,'0')}</span></td>
       <td>
-        <div class="runname">${AT.escape(r.label)}</div>
+        <div class="runname">${AT.escape(r.label)} ${badge}</div>
         <div class="meta">${AT.escape(r.id)}</div>
       </td>
       <td>${AT.escape(r.model)}</td>
