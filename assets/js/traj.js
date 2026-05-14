@@ -56,7 +56,15 @@
   `;
 
   function renderTurns(turns) {
-    if (!turns.length) return '<p class="no-results">No turn data recorded.</p>';
+    if (!turns.length) return `
+      <div style="padding: 32px 0; border-top: 1px dashed var(--rule-soft);">
+        <p class="eyebrow" style="color:var(--ui);">Trace unavailable</p>
+        <p class="serif" style="font-size:17px; line-height:1.5; max-width:60ch; font-variation-settings:'SOFT' 50,'opsz' 36;">
+          The verdict and adjudicator note above were judged from a trajectory that
+          was not synced to this site. The raw log lives in the private results
+          tree at <code>${AT.escape(traj.source_path || '—')}</code>.
+        </p>
+      </div>`;
     return turns.map(t => `
       <div class="turn">
         <div class="marker">
