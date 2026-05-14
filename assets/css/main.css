@@ -423,7 +423,32 @@ table.board td.right { text-align: right; }
 .turn .marker { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); }
 .turn .marker .n { font-family: 'Fraunces', serif; font-size: 56px; line-height: 0.9; display: block; color: var(--ink); font-variation-settings: 'SOFT' 100, 'opsz' 144; }
 .turn .body { display: flex; flex-direction: column; gap: 16px; }
-.turn .body .text { font-family: 'Fraunces', serif; font-size: 17px; line-height: 1.45; font-weight: 350; font-variation-settings: 'SOFT' 50, 'opsz' 36; white-space: pre-wrap; }
+.turn .body .text {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  line-height: 1.45;
+  font-weight: 350;
+  font-variation-settings: 'SOFT' 50, 'opsz' 36;
+  white-space: pre-wrap;
+  border: 1px solid var(--rule-soft);
+  border-left: 3px solid var(--ink);
+  background: var(--paper);
+  padding: 14px 18px;
+  position: relative;
+}
+.turn .body .text::before {
+  content: 'Assistant';
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  background: var(--paper);
+  padding: 0 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
 .tool-call {
   border: 1px solid var(--rule-soft);
   background: var(--paper-light);
