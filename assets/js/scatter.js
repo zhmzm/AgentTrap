@@ -75,11 +75,16 @@ AT.scatter = (() => {
     sorted.forEach((p, i) => {
       const cx = sx(p.x), cy = sy(p.y);
       const topSafe = p.x >= 0.5 && p.y >= 0.5;
+      const labelLeft = cx > PAD.l + innerW * 0.7;
       const above = chooseSide(cx, placed);
       const labelY = above ? cy - 16 : cy + 28;
       placed.push({ cx, cy, ly: labelY, above });
 
       const g = el('g', { class: 'sp', style: 'cursor:pointer', opacity: 0 });
+      const titleNode = el('title', {});
+      titleNode.textContent = `${p.r.model} · ${p.r.framework} — defense ${AT.pct(1 - p.r.asr)}, benign ${AT.pct(p.r.benign_acc)}, ASR ${AT.pct(p.r.asr)} (n=${p.r.observed_denom})`;
+      g.appendChild(titleNode);
+
       const c = el('circle', {
         cx, cy, r: 8,
         fill: topSafe ? 'var(--bc)' : 'var(--ink)',
@@ -90,13 +95,16 @@ AT.scatter = (() => {
         x: cx + 11, y: cy - 8, 'font-family': SERIF, 'font-size': 14, fill: 'var(--bc)',
       }, '★'));
 
-      const lx = cx + 12;
+      const lx = labelLeft ? cx - 12 : cx + 12;
+      const labelAnchor = labelLeft ? 'end' : 'start';
       g.appendChild(txt({
-        x: lx, y: labelY, 'font-family': SERIF, 'font-size': 13, fill: 'var(--ink)',
+        x: lx, y: labelY, 'text-anchor': labelAnchor,
+        'font-family': SERIF, 'font-size': 13, fill: 'var(--ink)',
         'font-variation-settings': "'SOFT' 50, 'opsz' 24",
       }, p.r.model));
       g.appendChild(txt({
-        x: lx, y: labelY + 13, 'font-family': MONO, 'font-size': 10,
+        x: lx, y: labelY + 13, 'text-anchor': labelAnchor,
+        'font-family': MONO, 'font-size': 10,
         fill: 'var(--ink-mute)', 'letter-spacing': '0.08em',
       }, '· ' + p.r.framework));
 
@@ -126,7 +134,7 @@ AT.scatter = (() => {
   function chooseSide(cx, placed) {
     let above = 0, below = 0;
     placed.forEach(p => {
-      if (Math.abs(p.cx - cx) > 160) return;
+      if (Math.abs(p.cx - cx) > 80) return;
       if (p.above) above++; else below++;
     });
     return above <= below;

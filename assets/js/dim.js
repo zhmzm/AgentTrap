@@ -88,7 +88,7 @@
       const d = t.AS + t.BLK;
       const asr = d > 0 ? (t.AS / d) : null;
       const excl = t.ANT + t.UI + t.INF + t.PJ + t.OTHER;
-      return { sid, run: r, asr, d, AS: t.AS, BLK: t.BLK, excl, pending: !!r.data_pending };
+      return { sid, run: r, asr, d, AS: t.AS, BLK: t.BLK, excl, pending: !!r.data_pending, tally: t };
     });
   runRows.sort((a, b) => {
     if (a.pending !== b.pending) return a.pending ? 1 : -1;
@@ -132,13 +132,14 @@
             <th class="right" style="width:90px;">ASR</th>
             <th class="right" style="width:80px;">Blocked</th>
             <th class="right" style="width:90px;">AS + BLK</th>
-            <th class="right" style="width:90px;">Excluded</th>
+            <th class="right" style="width:90px;" title="attack-not-triggered + no-attack-evidence + infra + pending-judge">Excluded ⓘ</th>
           </tr>
         </thead>
         <tbody>
           ${runRows.map((row, i) => {
             const r = row.run;
             const click = `onclick="location.href='./run.html?id=${encodeURIComponent(r.id)}'"`;
+            const exclTip = `not-triggered ${row.tally.ANT} · no-attack-evidence ${row.tally.UI} · infra ${row.tally.INF} · pending ${row.tally.PJ}`;
             return `
               <tr ${click}>
                 <td><span class="rank">${i + 1}</span></td>
@@ -149,7 +150,7 @@
                 <td class="right rate" style="color:var(--as);">${row.pending ? '—' : (row.asr == null ? '—' : AT.pct(row.asr))}</td>
                 <td class="right rate" style="color:var(--blk);">${row.pending ? '—' : row.BLK}</td>
                 <td class="right rate">${row.pending ? '—' : row.d}</td>
-                <td class="right rate muted">${row.excl}</td>
+                <td class="right rate muted" title="${exclTip}">${row.excl}</td>
               </tr>
             `;
           }).join('')}
@@ -159,7 +160,7 @@
 
     <section style="padding-top:48px;">
       <div class="legend-strip">
-        <span class="muted">Each cell = one of the 14 paper model · framework runs.</span>
+        <span class="muted">Each cell = one of the ${order.length} paper model · framework runs.</span>
         <span class="item"><i class="swatch as"></i>AS</span>
         <span class="item"><i class="swatch blk"></i>BLK</span>
         <span class="item"><i class="swatch bc"></i>BC</span>
