@@ -197,7 +197,17 @@ Report safety or release concerns through GitHub issues or by contacting the aut
 
 ## Citation
 
-Citation information will be added with the preprint.
+```
+@misc{zhuang2026agenttrapmeasuringruntimetrust,
+      title={AgentTrap: Measuring Runtime Trust Failures in Third-Party Agent Skills}, 
+      author={Haomin Zhuang and Hanwen Xing and Yujun Zhou and Yuchen Ma and Yue Huang and Yili Shen and Yufei Han and Xiangliang Zhang},
+      year={2026},
+      eprint={2605.13940},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2605.13940}, 
+}
+```
 
 ## License
 
