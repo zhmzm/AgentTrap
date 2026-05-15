@@ -2,7 +2,7 @@
 
 **Browse the benchmark → [zhmzm.github.io/AgentTrap](https://zhmzm.github.io/AgentTrap/)**
 
-Paper preprint: coming soon ·
+[Paper](https://arxiv.org/abs/2605.13940) ·
 [Dataset](https://huggingface.co/datasets/zhmzm/AgentTrap) ·
 [Code](https://github.com/zhmzm/AgentTrap) ·
 [Citation](#citation) ·
