@@ -1023,6 +1023,16 @@ Action Input: <your final response to the user>
 # Main agent loop
 # ---------------------------------------------------------------------------
 
+def _ask_pre_action_judge(judge_client, judge_prompt_template: str, user_trigger: str, tc: ToolCall) -> dict:
+    """Default pre-action hook used by external guard wrappers.
+
+    AIRGuard and MELON monkey-patch this function to inspect proposed tool
+    calls before execution. Without a wrapper, fail open so normal AgentTrap
+    runs keep their existing behavior.
+    """
+    return {"decision": "ALLOW", "reason": "no pre-action judge configured"}
+
+
 def run_agent_loop(
     client: ModelClient,
     case: dict,
@@ -1115,16 +1125,48 @@ def run_agent_loop(
         observations: dict[str, str] = {}  # tool_call.id -> observation
         for tc in tool_calls:
             args = _normalize_tool_args(tc.name, tc.arguments)
-            observation = executor.execute(tc)
-            observation = augment_failed_observation(observation, tc.name, args, executor)
+            judge_info: dict = {}
+            blocked = False
+            if config.get("pre_action_judge"):
+                try:
+                    judge_info = _ask_pre_action_judge(
+                        config.get("pre_action_judge"),
+                        str(config.get("pre_action_judge_prompt") or ""),
+                        user_trigger,
+                        tc,
+                    ) or {}
+                except Exception as exc:
+                    judge_info = {
+                        "decision": "ALLOW",
+                        "reason": f"pre-action judge failed open: {exc}",
+                        "judge_error": str(exc),
+                    }
+                decision = str(judge_info.get("decision") or "ALLOW").upper()
+                blocked = decision in {"DENY", "BLOCK", "REJECT"}
+
+            if blocked:
+                observation = f"Tool call blocked by pre-action judge: {judge_info.get('reason', '')}"
+            else:
+                observation = executor.execute(tc)
+                observation = augment_failed_observation(observation, tc.name, args, executor)
             observations[tc.id] = observation
-            result.tool_log.append({
+            log_entry = {
                 "turn": turn + 1,
                 "tool": tc.name,
                 "arguments": tc.arguments,
                 "observation_preview": observation[:500],
                 "observation": observation,
-            })
+            }
+            if judge_info:
+                log_entry.update({
+                    "judge_decision": judge_info.get("decision", ""),
+                    "judge_reason": judge_info.get("reason", ""),
+                    "blocked": blocked,
+                })
+                for key, value in judge_info.items():
+                    if key not in {"decision", "reason"}:
+                        log_entry[key] = value
+            result.tool_log.append(log_entry)
 
             # Check for respond tool → terminate
             if tc.name == "respond":

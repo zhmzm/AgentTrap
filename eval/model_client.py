@@ -969,6 +969,13 @@ def create_client(config: dict) -> ModelClient:
     backend = config.get("backend", "anthropic")
     model = config["model"]
 
+    def _timeout_int(*keys: str, default: int) -> int:
+        for key in keys:
+            value = config.get(key)
+            if value is not None:
+                return int(value)
+        return default
+
     if backend == "openai":
         import os as _os
         if resolve_model_auth:
@@ -1007,7 +1014,7 @@ def create_client(config: dict) -> ModelClient:
             timeout=float(config.get("request_timeout") or config.get("timeout") or 240),
             reasoning_effort=config.get("reasoning_effort"),
         )
-    elif backend in {"codex_cli", "openai_codex_oauth"}:
+    elif backend in {"codex_cli", "codexcli", "openai_codex_oauth"}:
         if resolve_model_auth:
             # Validate that a local Codex OAuth profile exists, but do not pass
             # the token to the child process. Codex CLI loads its own auth file.
@@ -1018,23 +1025,23 @@ def create_client(config: dict) -> ModelClient:
         return CodexCliClient(
             model=model,
             codex_bin=config.get("codex_bin", "codex"),
-            timeout=int(config.get("codex_timeout", 180)),
+            timeout=_timeout_int("codex_timeout", "timeout", default=180),
         )
     elif backend in {"claude_cli", "anthropic_oauth_cli", "claude_oauth_cli"}:
         return ClaudeCliClient(
             model=model,
             claude_bin=config.get("claude_bin", "claude"),
-            timeout=int(config.get("claude_timeout") or config.get("timeout") or 240),
+            timeout=_timeout_int("claude_timeout", "timeout", default=240),
             max_budget_usd=config.get("max_budget_usd"),
             effort=config.get("effort"),
         )
     elif backend in {"codex_oauth_api", "openai_codex_oauth_api"}:
-        timeout = config.get("codex_timeout") or config.get("timeout") or 180
+        timeout = _timeout_int("codex_timeout", "timeout", default=180)
         reasoning_effort = config.get("reasoning_effort") or "none"
         return CodexOAuthResponsesClient(
             model=model,
             api_base=config.get("api_base") or config.get("base_url") or "https://chatgpt.com/backend-api/codex",
-            timeout=int(timeout),
+            timeout=timeout,
             reasoning_effort=str(reasoning_effort),
         )
     elif backend == "anthropic":
