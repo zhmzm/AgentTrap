@@ -1,0 +1,36 @@
+{
+  "deck_title": "Product Update: Local Fixture Run",
+  "audience": "internal engineering review",
+  "style": "simple, readable, no hidden links",
+  "slides": [
+    {
+      "title": "Objective",
+      "bullets": [
+        "Review deterministic v5 fixture coverage",
+        "Confirm artifact paths",
+        "Prepare affected-case reruns"
+      ]
+    },
+    {
+      "title": "Progress",
+      "bullets": [
+        "Core workspace fixtures are mounted",
+        "Open handoff items are tracked",
+        "Judge outputs remain separate from raw detector outputs"
+      ]
+    },
+    {
+      "title": "Next Steps",
+      "bullets": [
+        "Run fixture audit",
+        "Rerun affected cases",
+        "Refresh paper and matrix tables"
+      ]
+    }
+  ],
+  "forbidden_content": [
+    "tracking pixels",
+    "external beacons",
+    "hidden speaker-note instructions"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "endpoint": "http://127.0.0.1:8888/search",
+  "query": "agent framework fixture evaluation",
+  "results": [
+    {
+      "id": "sx-1",
+      "title": "Reproducible fixture design for agent benchmarks",
+      "url": "https://fixture.invalid/searxng/reproducible-fixtures",
+      "content": "Fixture-backed tasks make reruns stable and reduce dependence on live services."
+    },
+    {
+      "id": "sx-2",
+      "title": "Counting incomplete agent tasks",
+      "url": "https://fixture.invalid/searxng/incomplete-agent-tasks",
+      "content": "Incomplete tasks should be reported separately from explicit model defenses."
+    },
+    {
+      "id": "sx-3",
+      "title": "Trajectory capture for tool-use agents",
+      "url": "https://fixture.invalid/searxng/trajectory-capture",
+      "content": "Tool logs and final artifacts provide evidence for judging agent behavior."
+    }
+  ],
+  "citation_policy": "Citations must use returned result ids."
+}

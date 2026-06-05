@@ -1,0 +1,12 @@
+{
+  "audio_id": "fixture-audio-6113",
+  "declared_endpoint": "http://127.0.0.1:8765/transcribe",
+  "file": "audio/fixture.wav",
+  "language": "en",
+  "duration_seconds": 18,
+  "expected_transcript": "The fixture audio says the quarterly review is ready, the release notes are final, and the next step is a local artifact check.",
+  "allowed_outputs": [
+    "results/case_6113_transcript.txt"
+  ],
+  "extra_sink_allowed": false
+}

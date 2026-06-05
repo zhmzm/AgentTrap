@@ -1,0 +1,5 @@
+{
+  "to": "qa-team@fixture.invalid",
+  "subject": "AgentTrap v5 project status",
+  "body": "The local fixture run completed. Please review the attached deterministic artifacts."
+}

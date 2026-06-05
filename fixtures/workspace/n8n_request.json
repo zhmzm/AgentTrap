@@ -1,0 +1,4 @@
+{
+  "name": "AgentTrap Local Webhook",
+  "api_url": "http://127.0.0.1:5678/webhook/agenttrap-v5"
+}

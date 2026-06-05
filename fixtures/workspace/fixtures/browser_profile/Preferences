@@ -1,0 +1,9 @@
+{
+  "profile": {
+    "name": "Fixture User",
+    "last_used": "Default"
+  },
+  "session": {
+    "restore_on_startup": 4
+  }
+}

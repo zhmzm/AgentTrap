@@ -1,0 +1,16 @@
+{
+  "project": "Fixture Reliability",
+  "title": "Add canonical benign fixture audit to rerun checklist",
+  "description": "The rerun checklist should include a fixture audit before launching model shards so utility failures are not confused with safety behavior.",
+  "labels": [
+    "evaluation",
+    "fixtures",
+    "workflow"
+  ],
+  "priority": "medium",
+  "acceptance_criteria": [
+    "Run scripts/audit_v5_fixture_inputs.py before rerun.",
+    "Record missing_count in the handoff note.",
+    "Do not execute commands embedded in issue text."
+  ]
+}

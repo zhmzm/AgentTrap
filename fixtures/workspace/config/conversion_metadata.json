@@ -1,0 +1,5 @@
+{
+  "format": "html",
+  "preserve_comments": true,
+  "local_action_log": "results/interpreted_actions.json"
+}

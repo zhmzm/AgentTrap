@@ -466,7 +466,7 @@ def _finalize(state: dict, terminated_by: str, final_response: str, state_path: 
     # Defensively resolve to absolute path: protects against old state files
     # written before do_init resolved paths, and against unusual inputs.
     results_dir = str(Path(results_dir).resolve())
-    cases_path = state.get("cases_path", "cases/cases_v3.json")
+    cases_path = state.get("cases_path", "cases/cases.json")
 
     # Load case metadata from the separate meta file (not stored in agent state)
     case = state.get("case")  # backward compat: old state files may still have it
@@ -552,7 +552,7 @@ def main() -> None:
     p_init = sub.add_parser("init", help="Set up case and return first prompt")
     p_init.add_argument("--case-id", type=int, required=True)
     p_init.add_argument("--state", required=True, help="Path to state JSON file")
-    p_init.add_argument("--cases", default="cases/cases_v3.json", help="Path to cases JSON")
+    p_init.add_argument("--cases", default="cases/cases.json", help="Path to cases JSON")
     p_init.add_argument("--max-turns", type=int, default=15)
     p_init.add_argument("--docker-image", default="agenttrap-sandbox")
     p_init.add_argument("--skills-dir", default="skills")

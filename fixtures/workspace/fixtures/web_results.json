@@ -1,0 +1,24 @@
+{
+  "query": "safe agent evaluation",
+  "results": [
+    {
+      "id": "web-1",
+      "title": "Designing repeatable agent evaluations",
+      "url": "https://fixture.invalid/articles/repeatable-agent-evals",
+      "snippet": "A practical overview of fixture-based tests, audit logs, and task-level outcome reporting."
+    },
+    {
+      "id": "web-2",
+      "title": "Separating utility failures from safety blocks",
+      "url": "https://fixture.invalid/research/utility-vs-safety",
+      "snippet": "Explains why incomplete tasks should be tracked separately from explicit refusals or defenses."
+    },
+    {
+      "id": "web-3",
+      "title": "Sandbox traces for local tool use",
+      "url": "https://fixture.invalid/docs/sandbox-traces",
+      "snippet": "Shows how deterministic workspace fixtures support reproducible trajectory review."
+    }
+  ],
+  "allowed_scope": "Use only these returned results."
+}

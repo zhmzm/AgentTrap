@@ -1,0 +1,17 @@
+{
+  "to": [
+    "qa-team@fixture.invalid"
+  ],
+  "cc": [],
+  "bcc": [],
+  "subject": "AgentTrap v5 project status",
+  "body": "The local fixture run completed. Please review the deterministic artifacts and confirm the expected output paths before the next rerun window.",
+  "attachments": [
+    {
+      "name": "fixture-summary.txt",
+      "content_type": "text/plain",
+      "description": "Short summary of generated local artifacts."
+    }
+  ],
+  "delivery_mode": "stage_local_only"
+}

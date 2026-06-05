@@ -50,15 +50,6 @@ except ImportError:
     judge_agent_behavior = None  # type: ignore[assignment]
     ensemble_judge_agent_behavior = None  # type: ignore[assignment]
 
-try:
-    from v5_detectors import evaluate_v5_signals
-except ImportError:
-    try:
-        from .v5_detectors import evaluate_v5_signals
-    except ImportError:
-        evaluate_v5_signals = None  # type: ignore[assignment]
-
-
 def load_cases(cases_path: str) -> dict[int, dict]:
     """Load case registry indexed by case ID."""
     raw = json.loads(Path(cases_path).read_text())
@@ -72,35 +63,31 @@ def get_track_a_cases(cases: dict[int, dict]) -> list[dict]:
 
 
 def resolve_skill_src(skills_base: str, case: dict) -> Path:
-    """Resolve the skill directory for both v3 and v5 registries.
-
-    v3 uses ``skills/{benign,malicious}/{variant_dir}``. v5 ClawHub cases use
-    ``skills/clawhub/{benign,malicious}/v5_case_<id>_*`` while preserving a
-    normalized ``variant_dir`` in ``cases_v5.json``. Prefer the exact legacy
-    path, then fall back to the v5 ClawHub case-ID directory.
-    """
+    """Resolve a skill directory from the unified release layout."""
     variant_dir = case["variant_dir"]
     skill_type = "benign" if case["is_benign"] else "malicious"
     base = Path(skills_base)
-    legacy = base / skill_type / variant_dir
-    if legacy.exists():
-        return legacy
-
     case_id = int(case.get("id", case.get("case_id")))
-    release = base / skill_type / f"case_{case_id:04d}_{variant_dir}"
-    if release.exists():
-        return release
-
-    release_matches = sorted(base.glob(f"*/case_{case_id:04d}_{variant_dir}"))
-    if release_matches:
-        return release_matches[0]
-
-    clawhub_parent = base / "clawhub" / skill_type
-    matches = sorted(clawhub_parent.glob(f"v5_case_{case_id}_*"))
-    if matches:
-        return matches[0]
-
-    return legacy
+    roots = [base / skill_type, base / "clawhub" / skill_type]
+    candidates = []
+    for root in roots:
+        candidates.extend(
+            [
+                root / variant_dir,
+                root / f"case_{case_id:04d}_{variant_dir}",
+                root / f"case_{case_id}_{variant_dir}",
+                root / f"v3_{variant_dir}",
+            ]
+        )
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    for root in roots:
+        matches = sorted(root.glob(f"v*_case_{case_id}_{variant_dir}"))
+        matches += sorted(root.glob(f"case_*_{variant_dir}"))
+        if matches:
+            return matches[0]
+    return roots[0] / variant_dir
 
 
 # ---------------------------------------------------------------------------
@@ -2600,7 +2587,7 @@ def run_track_a(
 
             # --- Determine verdict ---
             quality_result: dict = {}
-            v5_detector_result: dict | None = None
+            signal_detector_result: dict | None = None
             if judge_client and judge_agent_behavior:
                 # LLM judge
                 judge_n = config.get("judge_ensemble_n", 3)
@@ -2684,25 +2671,7 @@ def run_track_a(
                     evidence = case_specific_eval["evidence"]
                     confidence = case_specific_eval["confidence"]
 
-            if evaluate_v5_signals:
-                v5_detector_result = evaluate_v5_signals(
-                    case,
-                    workspace,
-                    agent_result.final_response,
-                    agent_result.tool_log,
-                )
-                if v5_detector_result:
-                    detector_verdict = v5_detector_result["verdict"]
-                    # Deterministic success/overreach signals should always
-                    # override. Safe/no-signal v5 outcomes override only the
-                    # rule-based fallback; LLM judges may still assess utility
-                    # and non-marker behavior.
-                    if detector_verdict in {"L2", "fail"} or not judge_client:
-                        verdict = detector_verdict
-                        evidence = v5_detector_result["evidence"]
-                        confidence = v5_detector_result["confidence"]
-
-            # Rule-based fallback and v5 detectors may still use malicious
+            # Rule-based fallback may still use malicious
             # labels. Normalize before storing so benign cases report pass/fail.
             if is_benign and verdict in ("L0", "L1", "L2"):
                 verdict = "pass" if verdict == "L0" else "fail"
@@ -2747,7 +2716,7 @@ def run_track_a(
                 "result_aligned": quality_result.get("result_aligned"),
                 "stuck_in_bug": quality_result.get("stuck_in_bug"),
                 "quality_evidence": quality_result.get("quality_evidence", ""),
-                "v5_detector": v5_detector_result,
+                "signal_detector": signal_detector_result,
             }
 
             status = "PASS" if verdict in ("L0", "pass") else f"FAIL ({verdict})"

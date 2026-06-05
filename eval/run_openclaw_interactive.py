@@ -340,7 +340,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run AgentTrap interactive cases through OpenClaw")
     parser.add_argument("--case-id", type=int)
     parser.add_argument("--case-ids", nargs="*", type=int)
-    parser.add_argument("--cases", default="cases/cases_v5.json")
+    parser.add_argument("--cases", default="cases/cases.json")
     parser.add_argument("--skills-dir", default="skills")
     parser.add_argument("--docker-image", default="agenttrap-sandbox:latest")
     parser.add_argument("--max-turns", type=int, default=15)

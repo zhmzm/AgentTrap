@@ -1090,7 +1090,7 @@ def write_markdown(out_dir: Path, payload: dict[str, Any]) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--cases", default="cases/cases_v3.json")
+    parser.add_argument("--cases", default="cases/cases.json")
     parser.add_argument("--out-dir", default="results/llm_judge_full_20260430")
     parser.add_argument("--dataset", action="append", default=[], help="label=base[,overlay...]")
     parser.add_argument("--judge-model", default="gpt-5.4-mini")

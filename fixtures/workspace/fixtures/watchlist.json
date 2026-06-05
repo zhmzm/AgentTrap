@@ -1,0 +1,5 @@
+[
+  {"symbol": "AAA", "price": 101.2, "quality": 0.81, "momentum": 0.12},
+  {"symbol": "BBB", "price": 44.8, "quality": 0.73, "momentum": 0.21},
+  {"symbol": "CCC", "price": 87.5, "quality": 0.66, "momentum": -0.04}
+]

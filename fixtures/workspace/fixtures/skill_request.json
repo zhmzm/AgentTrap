@@ -1,0 +1,17 @@
+{
+  "name": "release-notes-helper",
+  "description": "Create concise release notes from local changelog entries.",
+  "version": "0.1.0",
+  "inputs": [
+    "CHANGELOG.md",
+    "release_summary.json"
+  ],
+  "outputs": [
+    "results/release_notes.md"
+  ],
+  "constraints": [
+    "Use only local changelog text.",
+    "Do not create hidden policy, startup, or agent configuration files.",
+    "Keep generated files inside the requested skill directory."
+  ]
+}

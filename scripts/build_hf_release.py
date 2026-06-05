@@ -241,6 +241,11 @@ SECRET_SCAN_PATTERNS = [
     re.compile(r"ghp_[0-9A-Za-z]{20,}"),
     re.compile(r"xox[baprs]-[0-9A-Za-z-]{20,}"),
 ]
+VERSIONED_RELEASE_PATTERNS = [
+    re.compile(r"cases_" + r"v\d+"),
+    re.compile(r"fixtures/" + r"v\d+"),
+    re.compile(r"v" + r"\d+_case_(\d+)"),
+]
 
 
 def sha256_file(path: Path) -> str:
@@ -290,6 +295,11 @@ def redact_text(text: str) -> tuple[str, int]:
     return text, count
 
 
+def normalize_release_text(text: str) -> str:
+    text = re.sub(r"v\d+_case_(\d+)", r"case_\1", text)
+    return text
+
+
 def copy_file_with_redaction(src: Path, dst: Path, redactions: list[dict[str, Any]], release_rel: str) -> None:
     dst.parent.mkdir(parents=True, exist_ok=True)
     if src.suffix.lower() in TEXT_SUFFIXES:
@@ -299,6 +309,7 @@ def copy_file_with_redaction(src: Path, dst: Path, redactions: list[dict[str, An
             shutil.copy2(src, dst)
             return
         redacted, count = redact_text(text)
+        redacted = normalize_release_text(redacted)
         if count:
             redactions.append({"path": release_rel, "redaction_count": count, "reason": "token-like string replaced in release copy"})
         dst.write_text(redacted, encoding="utf-8")
@@ -313,15 +324,45 @@ def resolve_skill_path(repo: Path, case: dict[str, Any]) -> Path:
         repo / "skills/malicious",
         repo / "skills/benign",
     ]
-    matches = [root / case["variant_dir"] for root in roots if (root / case["variant_dir"]).exists()]
+    variant_dir = str(case["variant_dir"])
+    case_id = int(case.get("id", case.get("case_id")))
+    candidates = []
+    for root in roots:
+        candidates.extend(
+            [
+                root / variant_dir,
+                root / f"case_{case_id:04d}_{variant_dir}",
+                root / f"case_{case_id}_{variant_dir}",
+                root / f"v3_{variant_dir}",
+            ]
+        )
+    matches = [path for path in candidates if path.exists()]
+    if not matches:
+        for root in roots:
+            matches.extend(sorted(root.glob(f"v*_case_{case_id}_{variant_dir}")))
+            matches.extend(sorted(root.glob(f"case_*_{variant_dir}")))
     if not matches:
         raise FileNotFoundError(f"Could not resolve skill for case {case['id']}: {case['variant_dir']}")
     return matches[0]
 
 
+def public_variant_dir(case: dict[str, Any]) -> str:
+    """Return the release-facing variant name without internal version tags."""
+    value = str(case["variant_dir"])
+    value = re.sub(r"^v\d+_case_\d+_", "", value)
+    value = re.sub(r"^v\d+_", "", value)
+    return value
+
+
+def public_case(case: dict[str, Any]) -> dict[str, Any]:
+    row = dict(case)
+    row["variant_dir"] = public_variant_dir(case)
+    return row
+
+
 def release_skill_rel(case: dict[str, Any]) -> Path:
     group = "benign" if case["is_benign"] else "malicious"
-    return Path("skills") / group / f"case_{int(case['id']):04d}_{case['variant_dir']}"
+    return Path("skills") / group / f"case_{int(case['id']):04d}_{public_variant_dir(case)}"
 
 
 def repo_rel(path: Path, repo: Path) -> str:
@@ -347,7 +388,7 @@ def copy_skill_tree(src: Path, dst: Path, release_root: Path, redactions: list[d
             {
                 "relative_path": str(rel_src),
                 "release_path": release_rel,
-                "source_path": repo_rel(file, repo),
+                "source_path": release_rel,
                 "role": role,
                 "suffix": file.suffix.lower(),
                 "size_bytes": dst_file.stat().st_size,
@@ -388,7 +429,7 @@ def copy_tree_filtered(src: Path, dst: Path, release_root: Path, redactions: lis
         dst_file = dst / rel_src
         release_rel = str(dst_file.relative_to(release_root))
         copy_file_with_redaction(file, dst_file, redactions, release_rel)
-        rows.append({"release_path": release_rel, "source_path": repo_rel(file, repo), "size_bytes": dst_file.stat().st_size, "sha256": sha256_file(dst_file)})
+        rows.append({"release_path": release_rel, "source_path": release_rel, "size_bytes": dst_file.stat().st_size, "sha256": sha256_file(dst_file)})
     return rows
 
 
@@ -412,6 +453,31 @@ def scan_release(release_dir: Path) -> list[dict[str, Any]]:
                         "match_preview": match.group(0)[:12] + "...",
                     }
                 )
+    return findings
+
+
+def scan_versioned_release_markers(release_dir: Path) -> list[dict[str, Any]]:
+    findings: list[dict[str, Any]] = []
+    for file in sorted(release_dir.rglob("*")):
+        if not file.is_file():
+            continue
+        if file.suffix.lower() not in TEXT_SUFFIXES:
+            continue
+        try:
+            text = file.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            continue
+        for pattern in VERSIONED_RELEASE_PATTERNS:
+            match = pattern.search(text)
+            if match:
+                findings.append(
+                    {
+                        "path": str(file.relative_to(release_dir)),
+                        "pattern": pattern.pattern,
+                        "match_preview": match.group(0)[:80],
+                    }
+                )
+                break
     return findings
 
 
@@ -749,7 +815,8 @@ def build_release(repo: Path, release_dir: Path) -> dict[str, Any]:
         (release_dir / sub).mkdir(parents=True, exist_ok=True)
 
     generated_at = datetime.now(timezone.utc).isoformat()
-    cases = read_json(repo / "cases/cases_v6.json")
+    cases = read_json(repo / "cases/cases.json")
+    release_cases = [public_case(case) for case in cases]
     redactions: list[dict[str, Any]] = []
     task_rows: list[dict[str, Any]] = []
     package_rows: list[dict[str, Any]] = []
@@ -757,9 +824,10 @@ def build_release(repo: Path, release_dir: Path) -> dict[str, Any]:
 
     raw_dir = release_dir / "data/raw"
     raw_dir.mkdir(parents=True, exist_ok=True)
-    write_json(raw_dir / "cases.json", cases)
+    write_json(raw_dir / "cases.json", release_cases)
 
     for case in sorted(cases, key=lambda c: int(c["id"])):
+        public = public_case(case)
         src = resolve_skill_path(repo, case)
         rel_dst = release_skill_rel(case)
         dst = release_dir / rel_dst
@@ -773,10 +841,10 @@ def build_release(repo: Path, release_dir: Path) -> dict[str, Any]:
         package_row = {
             "case_id": int(case["id"]),
             "is_benign": bool(case["is_benign"]),
-            "variant_dir": case["variant_dir"],
+            "variant_dir": public["variant_dir"],
             "skill_name": case["skill_name"],
             "skill_source": case["skill_source"],
-            "source_skill_path": str(src.relative_to(repo)),
+            "source_skill_path": str(rel_dst),
             "release_skill_path": str(rel_dst),
             "file_count": skill_file_count,
             "size_bytes": skill_bytes,
@@ -787,12 +855,12 @@ def build_release(repo: Path, release_dir: Path) -> dict[str, Any]:
             file_row = dict(package_row)
             file_row.update(row)
             file_rows.append(file_row)
-        task_row = dict(case)
+        task_row = public
         task_row["case_id"] = int(case["id"])
         task_row["split"] = "benign" if case["is_benign"] else "malicious"
         task_row["skill_path"] = str(rel_dst)
         task_row["skill_manifest_path"] = "manifests/skill_files.parquet"
-        task_row["source_skill_path"] = str(src.relative_to(repo))
+        task_row["source_skill_path"] = str(rel_dst)
         task_row["release_version"] = RELEASE_VERSION
         task_rows.append(task_row)
 
@@ -803,7 +871,7 @@ def build_release(repo: Path, release_dir: Path) -> dict[str, Any]:
     write_table(release_dir / "manifests/skill_files", file_rows)
 
     copied_files: list[dict[str, Any]] = []
-    copied_files += copy_tree_filtered(repo / "fixtures/v5/workspace", release_dir / "fixtures/workspace", release_dir, redactions, repo)
+    copied_files += copy_tree_filtered(repo / "fixtures/workspace", release_dir / "fixtures/workspace", release_dir, redactions, repo)
     write_table(release_dir / "manifests/copied_support_files", copied_files)
 
     write_json(release_dir / "manifests/redactions.json", redactions)
@@ -812,6 +880,7 @@ def build_release(repo: Path, release_dir: Path) -> dict[str, Any]:
     make_archive(release_dir / "fixtures", release_dir / "archives/agenttrap_fixtures.tar.xz")
 
     findings = scan_release(release_dir)
+    versioned_findings = scan_versioned_release_markers(release_dir)
     summary = {
         "release_version": RELEASE_VERSION,
         "generated_at": generated_at,
@@ -824,8 +893,12 @@ def build_release(repo: Path, release_dir: Path) -> dict[str, Any]:
         "redaction_count": sum(row["redaction_count"] for row in redactions),
         "redacted_files": len(redactions),
         "secret_scan_findings": findings,
+        "versioned_release_marker_findings": versioned_findings,
         "copied_support_files": len(copied_files),
     }
+    if versioned_findings:
+        write_json(release_dir / "manifests/release_checks.json", summary)
+        raise RuntimeError(f"versioned release markers found: {versioned_findings[:5]}")
     write_json(release_dir / "manifests/release_checks.json", summary)
     write_dataset_card(release_dir / "README.md", summary)
     write_gitattributes(release_dir / ".gitattributes")

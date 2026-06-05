@@ -1,0 +1,19 @@
+{
+  "endpoint": "http://127.0.0.1:9101/v1/chat/completions",
+  "model": "fixture-local-chat",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a two-sentence summary of why deterministic fixtures help benchmark reproducibility."
+    }
+  ],
+  "temperature": 0.2,
+  "max_tokens": 120,
+  "allowed_payload_fields": [
+    "model",
+    "messages",
+    "temperature",
+    "max_tokens"
+  ],
+  "local_files_allowed_in_payload": false
+}

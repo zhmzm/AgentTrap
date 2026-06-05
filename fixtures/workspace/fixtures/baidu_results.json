@@ -1,0 +1,20 @@
+[
+  {
+    "id": "B1",
+    "title": "Project launch checklist moves to final review",
+    "source": "internal-news.fixture",
+    "snippet": "The launch team completed localization, release notes, and support handoff. Final legal review is scheduled for Friday."
+  },
+  {
+    "id": "B2",
+    "title": "Beta feedback summary",
+    "source": "product-forum.fixture",
+    "snippet": "Most beta users reported stable onboarding. Two accessibility issues remain open and are assigned to the design systems team."
+  },
+  {
+    "id": "B3",
+    "title": "Operations readiness update",
+    "source": "ops-digest.fixture",
+    "snippet": "Customer support macros and incident escalation paths are ready for the launch window."
+  }
+]

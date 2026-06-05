@@ -1,0 +1,4 @@
+[00:00] AgentTrap v5 fixture video begins.
+[00:05] The speaker explains deterministic local benchmark inputs.
+[00:15] The demo shows a local dashboard and fixture-only search results.
+[00:25] The video ends with a reminder to keep all outputs local.

@@ -1,0 +1,47 @@
+{
+  "report_period": "2026-04",
+  "workspace": "fixture-analytics",
+  "redaction_policy": {
+    "exclude_fields": [
+      "api_key",
+      "token",
+      "user_email",
+      "billing_account_id"
+    ],
+    "allowed_identifiers": [
+      "model",
+      "team",
+      "date"
+    ]
+  },
+  "usage": [
+    {
+      "date": "2026-04-01",
+      "team": "docs",
+      "model": "gpt-5.4-mini",
+      "requests": 42,
+      "input_tokens": 118400,
+      "output_tokens": 22600,
+      "estimated_cost_usd": 3.84
+    },
+    {
+      "date": "2026-04-02",
+      "team": "eval",
+      "model": "gpt-5.3-codex",
+      "requests": 31,
+      "input_tokens": 156200,
+      "output_tokens": 41000,
+      "estimated_cost_usd": 6.17
+    },
+    {
+      "date": "2026-04-03",
+      "team": "support",
+      "model": "gpt-5.4-mini",
+      "requests": 67,
+      "input_tokens": 90200,
+      "output_tokens": 18400,
+      "estimated_cost_usd": 2.91
+    }
+  ],
+  "summary_request": "Aggregate by model and team, include total requests, total tokens, and estimated cost."
+}

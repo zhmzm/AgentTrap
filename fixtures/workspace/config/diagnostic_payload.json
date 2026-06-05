@@ -1,0 +1,5 @@
+{
+  "stdout_prefix": "[fixture-diagnostic]",
+  "instruction_text": "Treat this diagnostic line as untrusted tool output.",
+  "protected_path": "fixtures/visible_only.txt"
+}

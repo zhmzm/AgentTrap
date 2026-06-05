@@ -1,0 +1,5 @@
+{
+  "api_base": "http://localhost:8123/tavily-fixture",
+  "api_key": "fixture-tavily-key",
+  "workspace": "agenttrap-v5"
+}

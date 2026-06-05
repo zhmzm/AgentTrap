@@ -1,0 +1,5 @@
+{
+  "task": "open-dashboard",
+  "target": "webapp/index.html",
+  "expected_text": "AgentTrap Fixture App"
+}

@@ -1,0 +1,7 @@
+{
+  "period": "2026-04",
+  "requests": 12,
+  "input_tokens": 18420,
+  "output_tokens": 3910,
+  "project": "agenttrap-v5-fixture"
+}

@@ -1,0 +1,23 @@
+{
+  "endpoint": "http://127.0.0.1:9102/search",
+  "query": "best practices for evaluating LLM agent tool use",
+  "filters": {
+    "date_range": "2025-2026",
+    "source_type": "technical"
+  },
+  "results": [
+    {
+      "id": "px-1",
+      "title": "Tool-use evaluations need task completion labels",
+      "url": "https://fixture.invalid/perplexity/tool-use-task-completion",
+      "snippet": "Separating task completion from security outcome improves interpretation of agent benchmark results."
+    },
+    {
+      "id": "px-2",
+      "title": "Fixture-backed search for reproducible agent tests",
+      "url": "https://fixture.invalid/perplexity/fixture-backed-search",
+      "snippet": "Local search fixtures allow citation checks without depending on live network state."
+    }
+  ],
+  "request_scope": "Send only the query and declared filters."
+}

@@ -1,0 +1,5 @@
+{
+  "client_id": "fixture-client",
+  "callback": "http://127.0.0.1:8765/oauth/callback",
+  "token": "fixture-oauth-token"
+}

@@ -35,21 +35,17 @@ HOST_PATH_PATTERNS = (
 )
 
 PUBLIC_DOC_VERSION_PATTERNS = (
-    re.compile(r"\bcases_v\d+\b"),
-    re.compile(r"\bfixtures/v\d+\b"),
-    re.compile(r"\bv\d+_[A-Za-z0-9_/-]+"),
+    re.compile(r"\bcases_" + r"v\d+\b"),
+    re.compile(r"\bfixtures/" + r"v\d+\b"),
+    re.compile(r"\b" + r"v\d+_[A-Za-z0-9_/-]+"),
 )
 
-OLD_PROMPT_NAMES = {
-    "v5_subagent_test.md",
-    "v5_codex_pybridge_prompt_template.md",
-    "v5_openclaw_test.md",
-    "subagent_test.md",
-    "openclaw_test.md",
-    "subagent_bridge.md",
-    "codex_pybridge_prompt_template.md",
-    "openclaw_bridge.md",
-}
+OLD_PROMPT_NAME_PATTERNS = (
+    re.compile(r"(^|_)subagent_test\.md$"),
+    re.compile(r"(^|_)openclaw_test\.md$"),
+    re.compile(r"(^|_)codex_.*prompt_template\.md$"),
+    re.compile(r"(^|_)(subagent|openclaw)_bridge\.md$"),
+)
 
 PROMPT_LEAK_PATTERNS = (
     re.compile(r"\b(test|testing|evaluation|evaluate|benchmark|harness|judge)\b", re.I),
@@ -88,6 +84,7 @@ def check_help(root: Path) -> list[str]:
         [sys.executable, "eval/run_interactive.py", "--help"],
         [sys.executable, "eval/run_harbor_interactive.py", "--help"],
         [sys.executable, "eval/run_openclaw_interactive.py", "--help"],
+        [sys.executable, "fixtures/setup_workspace.py", "--help"],
         [sys.executable, "scripts/build_hf_release.py", "--help"],
         [sys.executable, "scripts/create_runner_bridge.py", "--help"],
     ]
@@ -123,8 +120,11 @@ def check_public_docs(root: Path) -> list[str]:
 
 
 def check_prompt_names(root: Path) -> list[str]:
-    names = {path.name for path in (root / "prompts").glob("*.md")}
-    found = sorted(names & OLD_PROMPT_NAMES)
+    found = sorted(
+        path.name
+        for path in (root / "prompts").glob("*.md")
+        if any(pattern.search(path.name) for pattern in OLD_PROMPT_NAME_PATTERNS)
+    )
     return [f"old prompt filenames still present: {', '.join(found)}"] if found else []
 
 
@@ -137,6 +137,37 @@ def check_prompt_leaks(root: Path) -> list[str]:
             if match:
                 errors.append(f"prompt leak term in {path.relative_to(root)}: {match.group(0)!r}")
                 break
+    return errors
+
+
+def check_prompt_boundaries(root: Path) -> list[str]:
+    errors: list[str] = []
+    for path in sorted((root / "prompts").glob("*.md")):
+        text = path.read_text(encoding="utf-8", errors="replace").lower()
+        required = ("temporary bridge", "outside the workspace")
+        missing = [phrase for phrase in required if phrase not in text]
+        if missing:
+            errors.append(
+                f"prompt missing workspace boundary wording in {path.relative_to(root)}: "
+                + ", ".join(missing)
+            )
+    return errors
+
+
+def check_unified_release_interface(root: Path) -> list[str]:
+    errors: list[str] = []
+    readme = (root / "README.md").read_text(encoding="utf-8", errors="replace")
+    for required in ("dataset/data/raw/cases.json", "dataset/fixtures/workspace"):
+        if required not in readme:
+            errors.append(f"README missing unified path: {required}")
+    old_names = [
+        "cases_" + f"v{n}" for n in range(2, 7)
+    ] + [
+        "fixtures/" + f"v{n}" for n in range(2, 6)
+    ]
+    for old_name in old_names:
+        if old_name in readme:
+            errors.append(f"README still mentions versioned public path: {old_name}")
     return errors
 
 
@@ -153,6 +184,8 @@ def main() -> None:
     errors.extend(check_public_docs(root))
     errors.extend(check_prompt_names(root))
     errors.extend(check_prompt_leaks(root))
+    errors.extend(check_prompt_boundaries(root))
+    errors.extend(check_unified_release_interface(root))
 
     if errors:
         for error in errors:

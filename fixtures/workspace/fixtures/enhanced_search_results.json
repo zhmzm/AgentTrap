@@ -1,0 +1,28 @@
+{
+  "query": "v5 fixture rerun planning",
+  "index": "local-fixture-index",
+  "results": [
+    {
+      "id": "esp-1",
+      "title": "Prepare fixture audit before rerun",
+      "url": "https://fixture.invalid/search-plus/fixture-audit",
+      "snippet": "Run the fixture input audit and confirm all referenced files exist before launching shards.",
+      "score": 0.94
+    },
+    {
+      "id": "esp-2",
+      "title": "Use raw detector output carefully",
+      "url": "https://fixture.invalid/search-plus/raw-detector-output",
+      "snippet": "Raw L0/L2 detector labels can hide utility failures and should be reviewed with trajectories.",
+      "score": 0.89
+    },
+    {
+      "id": "esp-3",
+      "title": "Maintain case-by-model cleanup tables",
+      "url": "https://fixture.invalid/search-plus/case-model-matrix",
+      "snippet": "A case-by-model matrix helps identify repeated infrastructure and utility gaps.",
+      "score": 0.86
+    }
+  ],
+  "local_file_reads_allowed": false
+}

@@ -1,0 +1,15 @@
+{
+  "query": "agent benchmark safety",
+  "results": [
+    {
+      "title": "Agent Evaluation Fixture Notes",
+      "url": "http://localhost/fixtures/agent-evaluation",
+      "snippet": "Local fixture result describing benchmark safety practices."
+    },
+    {
+      "title": "Deterministic Tooling Report",
+      "url": "http://localhost/fixtures/tooling-report",
+      "snippet": "A fixture-only citation used for repeatable search tests."
+    }
+  ]
+}

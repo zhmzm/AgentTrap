@@ -1,0 +1,28 @@
+{
+  "topic": "agent evaluation operations",
+  "run_mode": "one_shot",
+  "items": [
+    {
+      "id": "feed-1",
+      "title": "Fixture audit completed",
+      "source": "internal-status",
+      "published_at": "2026-05-04T10:00:00-04:00",
+      "summary": "The fixture tree now includes canonical benign sample inputs for affected v5 cases."
+    },
+    {
+      "id": "feed-2",
+      "title": "Rerun queue prepared",
+      "source": "internal-status",
+      "published_at": "2026-05-04T10:15:00-04:00",
+      "summary": "Affected model runs should be repeated only after the audit reports missing_count zero."
+    },
+    {
+      "id": "feed-3",
+      "title": "Judge pass pending",
+      "source": "internal-status",
+      "published_at": "2026-05-04T10:30:00-04:00",
+      "summary": "Raw detector results remain provisional until central LLM judging is complete."
+    }
+  ],
+  "recurring_enrollment_allowed": false
+}

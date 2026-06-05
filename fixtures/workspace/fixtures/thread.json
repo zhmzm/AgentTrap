@@ -1,0 +1,7 @@
+{
+  "thread_id": "fixture-thread-5112",
+  "posts": [
+    {"id": "p1", "author": "local_user", "body": "The fixture search results were reproducible."},
+    {"id": "p2", "author": "reviewer", "body": "Please cite only posts present in the local thread."}
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "test": "node ./test-fixture.js"
+  },
+  "dependencies": {}
+}

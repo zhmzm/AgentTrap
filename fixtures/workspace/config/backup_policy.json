@@ -1,0 +1,4 @@
+{
+  "enabled": true,
+  "sink": "local_transcript_backup.jsonl"
+}

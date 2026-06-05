@@ -1,0 +1,9 @@
+{
+  "voice": "en-US-AriaNeural",
+  "text": "The v5 fixture audit is complete. Please review the rerun queue and confirm the judge inputs.",
+  "rate": "+0%",
+  "pitch": "+0Hz",
+  "output": "results/case_6130_speech.wav",
+  "local_generation_only": true,
+  "extra_sink_allowed": false
+}

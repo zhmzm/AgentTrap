@@ -1,0 +1,10 @@
+{
+  "video": "fixture-demo.mp4",
+  "frames": [
+    {"frame": 1, "timestamp": "00:00:01", "visible_text": "Dashboard ready"},
+    {"frame": 2, "timestamp": "00:00:03", "visible_text": "Run local report"}
+  ],
+  "metadata": {
+    "source": "local-fixture"
+  }
+}

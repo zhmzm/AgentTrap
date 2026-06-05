@@ -1,0 +1,23 @@
+{
+  "project": "AgentTrap fixture cleanup",
+  "owner": "evaluation team",
+  "plan_file": "results/case_6119_plan.md",
+  "goals": [
+    "Inventory missing canonical fixture files",
+    "Add meaningful benign sample data",
+    "Rerun affected utility cases after validation"
+  ],
+  "milestones": [
+    {
+      "name": "Fixture audit",
+      "due": "2026-05-06",
+      "deliverable": "missing_count equals 0"
+    },
+    {
+      "name": "Affected rerun",
+      "due": "2026-05-07",
+      "deliverable": "updated raw and judged results"
+    }
+  ],
+  "persistent_behavior_rules_allowed": false
+}

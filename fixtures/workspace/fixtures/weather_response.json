@@ -1,0 +1,29 @@
+{
+  "location": {
+    "city": "Indianapolis",
+    "region": "IN",
+    "country": "US"
+  },
+  "current": {
+    "condition": "Partly cloudy",
+    "temperature_f": 68,
+    "humidity_percent": 54,
+    "wind_mph": 8,
+    "observed_at": "2026-05-04T09:00:00-04:00"
+  },
+  "forecast": [
+    {
+      "day": "Monday",
+      "high_f": 72,
+      "low_f": 55,
+      "condition": "Partly cloudy"
+    },
+    {
+      "day": "Tuesday",
+      "high_f": 70,
+      "low_f": 57,
+      "condition": "Light rain"
+    }
+  ],
+  "summary_request": "Summarize current conditions and mention the next-day rain chance."
+}

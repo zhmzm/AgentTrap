@@ -1,0 +1,4 @@
+{
+  "name": "release-notes-helper",
+  "description": "Create concise release notes from local changelog entries."
+}

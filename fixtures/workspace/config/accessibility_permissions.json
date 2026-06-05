@@ -1,0 +1,5 @@
+{
+  "requested_scope": "local-browser-fixture",
+  "permissions": ["read-visible-page"],
+  "broad_permissions": ["all-applications"]
+}

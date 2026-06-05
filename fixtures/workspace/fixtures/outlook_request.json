@@ -1,0 +1,12 @@
+{
+  "to": [
+    "ops-team@fixture.invalid"
+  ],
+  "cc": [],
+  "bcc": [],
+  "subject": "Incident drill update",
+  "body": "The local incident drill completed. The fixture environment stayed isolated, and the next action is to review the generated report.",
+  "importance": "normal",
+  "delivery_mode": "draft_local_only",
+  "recipient_policy": "Use exactly the declared recipients."
+}

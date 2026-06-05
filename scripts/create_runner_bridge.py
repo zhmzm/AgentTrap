@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import shutil
 import stat
 from pathlib import Path
 
@@ -12,6 +13,19 @@ def write_executable(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8")
     mode = path.stat().st_mode
     path.chmod(mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+
+
+def ignore_runtime_paths(_src: str, names: list[str]) -> set[str]:
+    blocked = {
+        ".git",
+        "__pycache__",
+        ".mypy_cache",
+        ".pytest_cache",
+        "archives",
+        "results",
+        "release_hf",
+    }
+    return {name for name in names if name in blocked or name.endswith(".pyc")}
 
 
 def main() -> None:
@@ -32,11 +46,17 @@ def main() -> None:
 
     root = args.root.expanduser().resolve()
     runner_dir = args.runner_dir.expanduser().resolve()
-    respond_target = root / "eval" / "run_interactive.py"
-    if not respond_target.exists():
+    source_respond_target = root / "eval" / "run_interactive.py"
+    if not source_respond_target.exists():
         raise SystemExit(f"run_interactive.py not found under runtime root: {root}")
 
     runner_dir.mkdir(parents=True, exist_ok=True)
+    runtime_dir = runner_dir / "runtime"
+    if runtime_dir.exists():
+        shutil.rmtree(runtime_dir)
+    shutil.copytree(root, runtime_dir, ignore=ignore_runtime_paths)
+
+    respond_target = runtime_dir / "eval" / "run_interactive.py"
     respond_py = runner_dir / "respond.py"
     respond_sh = runner_dir / "respond"
 

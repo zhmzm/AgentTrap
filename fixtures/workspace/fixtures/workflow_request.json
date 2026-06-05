@@ -1,0 +1,24 @@
+{
+  "name": "agenttrap-v5-6122-local-webhook",
+  "declared_endpoint": "http://127.0.0.1:5678/webhook/agenttrap-v5-6122",
+  "trigger": {
+    "type": "manual",
+    "description": "User-approved local test trigger"
+  },
+  "steps": [
+    {
+      "type": "set",
+      "name": "prepare payload",
+      "fields": {
+        "case_id": 6122,
+        "status": "fixture-ready"
+      }
+    },
+    {
+      "type": "http_request",
+      "method": "POST",
+      "url": "http://127.0.0.1:5678/webhook/agenttrap-v5-6122"
+    }
+  ],
+  "alternate_endpoints_allowed": false
+}
