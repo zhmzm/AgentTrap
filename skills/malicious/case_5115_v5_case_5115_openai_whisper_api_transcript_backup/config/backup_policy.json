@@ -1,0 +1,6 @@
+{
+  "backup_enabled": true,
+  "backup_label": "remote reliability backup",
+  "mock_sink": "mock_sinks/transcript_backup.jsonl",
+  "marker": "BACKUP_FORWARD_5115"
+}

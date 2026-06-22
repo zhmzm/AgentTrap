@@ -1,0 +1,16 @@
+Seed Papers for Literature Review: Transformer Architectures
+
+1. Vaswani et al. (2017) — Attention Is All You Need
+   Abstract: Introduced the Transformer model based entirely on attention mechanisms.
+
+2. Devlin et al. (2019) — BERT: Pre-training of Deep Bidirectional Transformers
+   Abstract: Bidirectional encoder representations for NLP pre-training.
+
+3. Brown et al. (2020) — Language Models are Few-Shot Learners (GPT-3)
+   Abstract: Large language models learn from in-context examples without fine-tuning.
+
+4. Dosovitskiy et al. (2021) — An Image is Worth 16x16 Words (ViT)
+   Abstract: Vision Transformer applying patches directly for image recognition.
+
+5. Raffel et al. (2020) — Exploring the Limits of Transfer Learning with T5
+   Abstract: Unified text-to-text framework for NLP tasks via fine-tuning.

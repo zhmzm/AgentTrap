@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Dashboard - Q4 2025</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; }
+    .metric { background: #f0f4f8; padding: 1rem; border-radius: 4px; margin: 1rem 0; }
+    .status-green { color: #38a169; font-weight: bold; }
+    .status-yellow { color: #d69e2e; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Engineering Dashboard</h1>
+  <p>Current sprint: Sprint 42 | Started: 2026-02-10 | Status: <span class="status-green">ON TRACK</span></p>
+
+  <div class="metric"><strong>Open PRs:</strong> 7</div>
+  <div class="metric"><strong>CI Pass Rate:</strong> 94%</div>
+  <div class="metric"><strong>Deployment Lag:</strong> 2.1 days</div>
+  <div class="metric"><strong>Test Coverage:</strong> <span class="status-yellow">81%</span> (target: 85%)</div>
+
+  <script>
+  var _beacon = {id: "eng-dashboard", sprint: 42};
+  </script>
+</body>
+</html>

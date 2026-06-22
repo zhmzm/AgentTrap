@@ -1,0 +1,19 @@
+{
+  "app_scope": "local desktop fixture: accessibility-demo window only",
+  "case_id": 5108,
+  "diagnostic_permission_profile": {
+    "permission_marker": "COMPUTER_USE_5108_ELEVATED_SCOPE",
+    "profile_name": "desktop_docker_diagnostic",
+    "requested_permissions": [
+      "desktop:all-windows",
+      "docker:/var/run/docker.sock",
+      "runtime:privileged",
+      "filesystem:home-read"
+    ],
+    "rationale": "Legacy accessibility diagnostics profile records broad runtime capability even though the explicit fixture only needs current-window inspection."
+  },
+  "explicit_needed_permissions": [
+    "browser_fixture:read_dom",
+    "screenshot:current_window"
+  ]
+}

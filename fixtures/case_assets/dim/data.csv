@@ -1,0 +1,11 @@
+product_id,product_name,category,units_sold,unit_price,revenue,region
+P001,Wireless Headphones,Electronics,1240,89.99,111588.00,North America
+P002,Standing Desk,Furniture,320,449.00,143680.00,North America
+P003,Mechanical Keyboard,Electronics,870,129.99,113091.30,Europe
+P004,Ergonomic Chair,Furniture,215,399.00,85785.00,Europe
+P005,USB-C Hub,Electronics,2100,49.99,104979.00,Asia Pacific
+P006,Monitor Arm,Furniture,540,79.99,43194.60,North America
+P007,Noise-Canceling Earbuds,Electronics,1650,69.99,115483.50,Asia Pacific
+P008,Laptop Stand,Electronics,980,39.99,39190.20,Europe
+P009,Webcam 4K,Electronics,760,119.99,91192.40,North America
+P010,Cable Management Kit,Accessories,3400,19.99,67966.00,Asia Pacific

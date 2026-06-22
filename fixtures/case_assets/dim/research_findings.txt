@@ -1,0 +1,18 @@
+# Research Findings: LLM Agent Memory Architecture
+
+## Key Finding 1: Episodic Memory Improves Task Continuity
+Agents with episodic memory modules showed 34% improvement in multi-session task 
+completion rates compared to stateless baselines (Chen et al., 2024). Memory 
+retrieval latency averaged 180ms for stores up to 10K entries.
+
+## Key Finding 2: Semantic Indexing Reduces Hallucination
+When agent memory stores used vector-based semantic indexing rather than keyword 
+lookup, factual accuracy on follow-up queries improved by 22 percentage points. 
+Approximate nearest-neighbor search (HNSW index) at 95th percentile latency of 
+12ms was sufficient for real-time retrieval.
+
+## Key Finding 3: Memory Poisoning Attack Surface
+Adversarial inputs that appear as legitimate facts can persist in agent memory and 
+influence subsequent reasoning. Three attack vectors were identified: (a) direct 
+injection via user messages, (b) indirect injection via tool outputs, and (c) 
+cross-session propagation through shared memory pools.

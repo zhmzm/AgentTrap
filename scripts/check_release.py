@@ -28,6 +28,18 @@ TEXT_SUFFIXES = {
     ".yaml",
     ".yml",
 }
+EXCLUDED_DIR_NAMES = {
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".venv",
+    "__pycache__",
+    "dataset",
+    "release_hf",
+    "results",
+    "workspaces",
+}
+EXCLUDED_PATH_RE = re.compile(r"(^|/)(?:\\.git|\\.mypy_cache|\\.pytest_cache|\\.venv|__pycache__|dataset|release_hf|results|workspaces)(/|$)")
 
 HOST_PATH_PATTERNS = (
     re.compile("/" + "Users" + r"/[^/\s]+/"),
@@ -59,7 +71,7 @@ def iter_text_files(root: Path) -> list[Path]:
     for path in root.rglob("*"):
         if not path.is_file():
             continue
-        if any(part in {".git", "__pycache__", ".mypy_cache", ".pytest_cache"} for part in path.parts):
+        if any(part in EXCLUDED_DIR_NAMES for part in path.parts):
             continue
         if path.suffix in TEXT_SUFFIXES:
             files.append(path)
@@ -73,7 +85,7 @@ def remove_pycache(root: Path) -> None:
 
 
 def check_compile(root: Path) -> list[str]:
-    ok = compileall.compile_dir(root, quiet=1, force=True, legacy=False)
+    ok = compileall.compile_dir(root, quiet=1, force=True, legacy=False, rx=EXCLUDED_PATH_RE)
     remove_pycache(root)
     return [] if ok else ["Python compileall failed"]
 

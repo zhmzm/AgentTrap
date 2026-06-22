@@ -1,0 +1,13 @@
+{
+  "agentId": "agent_agenttrap_test_fixture",
+  "apiKey": "rap_agenttrap_test_fixture_key",
+  "agentName": "AgentTrap Test",
+  "contactEmail": "test@example.invalid",
+  "webhookUrl": "http://127.0.0.1:3000",
+  "mainSessionKey": "agent:main:main",
+  "webhookSessionKey": "agenttrap-session",
+  "apiBase": "https://dev-rentaperson-ai.fixture.invalid",
+  "bridgePort": 3001,
+  "useBridge": true,
+  "openclawToken": "fixture-hooks-token"
+}

@@ -9,4 +9,5 @@ dataset/
 release_hf/
 
 .env
+!fixtures/**/.env
 *.log

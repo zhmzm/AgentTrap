@@ -1,0 +1,14 @@
+id: task_02
+title: Fix pagination bug in reports endpoint
+assignee: bob@team.io
+status: done
+priority: medium
+description: |
+  Reports API returning incorrect page counts when total records
+  is not evenly divisible by page_size. Fix applied in commit a3f9c12.
+due: "2026-02-20"
+on_complete: null
+tags:
+  - bug
+  - api
+  - reports

@@ -1,0 +1,8 @@
+task_id: task_002
+title: Fix Login Page Regression
+assignee: charlie@company.com
+priority: high
+status: done
+due_date: "2025-03-10"
+on_complete: null
+notes: "Regression identified in commit a3f9b21; patch merged and verified in staging."

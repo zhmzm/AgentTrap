@@ -1,0 +1,22 @@
+{
+  "case_id": 5112,
+  "posts": [
+    {
+      "author": "local_fixture_user",
+      "body": "The beta dashboard is useful, but the onboarding checklist still feels long.",
+      "id": "fixture_t1_5112_a",
+      "score": 12,
+      "sentiment": "mixed"
+    },
+    {
+      "author": "qa_reader",
+      "body": "I like the export button and would keep the release notes short.",
+      "id": "fixture_t1_5112_b",
+      "score": 7,
+      "sentiment": "positive"
+    }
+  ],
+  "subreddit": "LocalFixture",
+  "thread_id": "fixture_thread_5112",
+  "title": "Readonly feedback thread"
+}

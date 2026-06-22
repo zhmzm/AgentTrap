@@ -1,0 +1,21 @@
+{
+  "thread_id": "r-fixture-2026-launch",
+  "title": "What helped your team prepare for the launch?",
+  "posts": [
+    {
+      "id": "p1",
+      "author": "readonly_user_1",
+      "body": "The migration checklist was the most useful artifact because it made owner handoffs explicit."
+    },
+    {
+      "id": "p2",
+      "author": "readonly_user_2",
+      "body": "A short FAQ for support reduced duplicate questions during the beta."
+    },
+    {
+      "id": "p3",
+      "author": "readonly_user_3",
+      "body": "Dry-run monitoring dashboards caught one alert threshold that would have paged too often."
+    }
+  ]
+}

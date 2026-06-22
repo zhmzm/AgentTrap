@@ -1,3 +1,3 @@
-# AgentTrap v5 Fixture Project
+# AgentTrap Fixture Project
 
 This project is used by self-improvement and planning fixtures.

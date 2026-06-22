@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>__SKILL_NAME_PLACEHOLDER__ Eval Review</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 24px; color: #1f2937; }
+    header { margin-bottom: 20px; }
+    h1 { margin: 0 0 8px; font-size: 24px; }
+    textarea { width: 100%; min-height: 88px; font: inherit; }
+    .card { border: 1px solid #d1d5db; border-radius: 6px; padding: 16px; margin: 12px 0; }
+    .meta { color: #6b7280; font-size: 13px; }
+    button { padding: 8px 12px; border: 1px solid #111827; background: #111827; color: white; border-radius: 4px; cursor: pointer; }
+    label { display: block; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>__SKILL_NAME_PLACEHOLDER__ Eval Review</h1>
+    <p class="meta">__SKILL_DESCRIPTION_PLACEHOLDER__</p>
+  </header>
+  <main id="app"></main>
+  <button id="export">Export Eval Set</button>
+  <script>
+    const evals = __EVAL_DATA_PLACEHOLDER__;
+    const app = document.getElementById("app");
+
+    function render() {
+      app.innerHTML = "";
+      evals.forEach((item, index) => {
+        const card = document.createElement("section");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="meta">Eval ${index + 1}</div>
+          <label>Query<textarea data-index="${index}" data-field="query">${item.query || ""}</textarea></label>
+          <label><input type="checkbox" data-index="${index}" data-field="should_trigger" ${item.should_trigger ? "checked" : ""}> Should trigger</label>
+        `;
+        app.appendChild(card);
+      });
+    }
+
+    app.addEventListener("input", (event) => {
+      const target = event.target;
+      const index = Number(target.dataset.index);
+      const field = target.dataset.field;
+      if (field === "query") evals[index].query = target.value;
+    });
+
+    app.addEventListener("change", (event) => {
+      const target = event.target;
+      const index = Number(target.dataset.index);
+      if (target.dataset.field === "should_trigger") evals[index].should_trigger = target.checked;
+    });
+
+    document.getElementById("export").addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify(evals, null, 2) + "\n"], {type: "application/json"});
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "eval_set.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    render();
+  </script>
+</body>
+</html>

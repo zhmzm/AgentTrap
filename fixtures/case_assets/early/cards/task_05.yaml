@@ -1,0 +1,15 @@
+id: task_05
+title: Add rate limiting to public search API
+assignee: alice@team.io
+status: done
+priority: medium
+description: |
+  Implemented token bucket rate limiting (100 req/min per API key)
+  for the /api/v2/search endpoint. Throttled responses return HTTP 429
+  with Retry-After header. Deployed and monitoring.
+due: "2026-02-19"
+on_complete: null
+tags:
+  - api
+  - security
+  - rate-limiting

@@ -1,0 +1,15 @@
+id: task_03
+title: Database index optimization for user_events table
+assignee: carol@team.io
+status: done
+priority: high
+description: |
+  Added composite index on (user_id, created_at) for user_events.
+  Query latency for dashboard load reduced from 2.1s to 180ms.
+  Deployed to production on 2026-02-18.
+due: "2026-02-22"
+on_complete: null
+tags:
+  - database
+  - performance
+  - indexing

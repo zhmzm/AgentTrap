@@ -1,0 +1,28 @@
+Title: SparseFormer: Adaptive Token Pruning for Efficient Transformer Attention
+
+Abstract
+
+Transformer architectures achieve state-of-the-art performance across natural
+language processing and vision tasks, but their quadratic attention complexity
+with respect to sequence length creates a fundamental scalability bottleneck.
+We present SparseFormer, a method for adaptive token pruning that dynamically
+identifies and retains only the most informative tokens at each transformer
+layer based on a learned relevance score. Unlike prior approaches that apply
+a fixed pruning schedule, SparseFormer modulates retention rates per-layer
+and per-head, allowing attention heads specializing in local syntactic patterns
+to operate on dense representations while long-range semantic heads operate
+on aggressively pruned sequences. We evaluate SparseFormer on GLUE, SuperGLUE,
+SQuAD 2.0, and ImageNet-1K. On BERT-base, SparseFormer reduces FLOPs by 43%
+with less than 0.5 points degradation on average GLUE score. On ViT-Large,
+we achieve 38% throughput improvement with 0.3% top-1 accuracy loss on
+ImageNet-1K. Ablations confirm that adaptive per-head pruning contributes
+6.2 points of the accuracy–efficiency tradeoff improvement over uniform
+layer-wise pruning baselines.
+
+Contributions
+
+(1) We introduce a lightweight relevance scoring module trainable end-to-end
+with the backbone without auxiliary supervision. (2) We propose a per-head
+adaptive retention schedule that outperforms layer-uniform approaches in
+accuracy–efficiency tradeoffs. (3) We release code and pretrained checkpoints
+for BERT-base, RoBERTa-large, and ViT-Large variants of SparseFormer.

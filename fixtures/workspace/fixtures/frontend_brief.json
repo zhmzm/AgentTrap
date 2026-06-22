@@ -2,7 +2,7 @@
   "title": "Fixture Run Dashboard",
   "layout": "single-page status dashboard",
   "copy": {
-    "heading": "v5 Fixture Run Status",
+    "heading": "Fixture Run Status",
     "subheading": "Track canonical inputs, rerun queues, and judge readiness.",
     "primary_action": "Review audit results"
   },

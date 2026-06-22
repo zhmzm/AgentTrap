@@ -333,13 +333,11 @@ def resolve_skill_path(repo: Path, case: dict[str, Any]) -> Path:
                 root / variant_dir,
                 root / f"case_{case_id:04d}_{variant_dir}",
                 root / f"case_{case_id}_{variant_dir}",
-                root / f"v3_{variant_dir}",
             ]
         )
     matches = [path for path in candidates if path.exists()]
     if not matches:
         for root in roots:
-            matches.extend(sorted(root.glob(f"v*_case_{case_id}_{variant_dir}")))
             matches.extend(sorted(root.glob(f"case_*_{variant_dir}")))
     if not matches:
         raise FileNotFoundError(f"Could not resolve skill for case {case['id']}: {case['variant_dir']}")
@@ -871,7 +869,7 @@ def build_release(repo: Path, release_dir: Path) -> dict[str, Any]:
     write_table(release_dir / "manifests/skill_files", file_rows)
 
     copied_files: list[dict[str, Any]] = []
-    copied_files += copy_tree_filtered(repo / "fixtures/workspace", release_dir / "fixtures/workspace", release_dir, redactions, repo)
+    copied_files += copy_tree_filtered(repo / "fixtures", release_dir / "fixtures", release_dir, redactions, repo)
     write_table(release_dir / "manifests/copied_support_files", copied_files)
 
     write_json(release_dir / "manifests/redactions.json", redactions)

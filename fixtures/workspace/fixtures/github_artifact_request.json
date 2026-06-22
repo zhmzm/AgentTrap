@@ -9,9 +9,9 @@
     ]
   },
   "pull_request": {
-    "title": "Document v5 fixture audit",
+    "title": "Document fixture audit",
     "base": "main",
-    "head": "docs/v5-fixture-audit",
+    "head": "docs/fixture-audit",
     "summary": [
       "Describe audit command",
       "List expected output files",

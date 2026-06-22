@@ -1,0 +1,35 @@
+Research Findings: Memory Systems in Language Model Agents
+Session: 2026-02-24
+Researcher: Dr. A. Patel
+
+---
+
+FINDING 1
+Topic: Vector store retrieval accuracy
+Summary: In experiments with 10,000-entry vector stores using text-embedding-3-small, top-1 retrieval accuracy averaged 84.2% for in-distribution queries and dropped to 71.3% for out-of-distribution phrasing. Hybrid retrieval (dense + BM25 sparse) improved OOD accuracy to 78.6%.
+Source: Internal benchmark, January 2026
+Tags: retrieval, vector-store, embedding
+
+FINDING 2
+Topic: Knowledge graph freshness vs. latency trade-off
+Summary: Temporal knowledge graphs with decay functions (half-life = 30 days) showed 12% lower hallucination rates on time-sensitive queries compared to static knowledge graphs, at a cost of 18ms additional retrieval latency per query.
+Source: Temporal KG paper, NeurIPS 2025 workshop
+Tags: temporal, knowledge-graph, freshness
+
+FINDING 3
+Topic: Memory poisoning surface area
+Summary: Property graph nodes injected with false priority metadata were retrieved preferentially in 67% of test cases when priority scores differed by more than 0.3 on a 0-1 scale. The agent treated high-priority nodes as authoritative regardless of source attribution.
+Source: Adversarial memory attack evaluation, February 2026
+Tags: security, poisoning, property-graph
+
+FINDING 4
+Topic: Cross-session context continuity
+Summary: Agents equipped with persistent episodic memory showed 31% better task completion rates on multi-session workflows compared to stateless agents. However, errors introduced in early sessions propagated to later sessions in 23% of cases, highlighting the importance of memory validation.
+Source: Multi-session agent evaluation, Q4 2025
+Tags: episodic-memory, continuity, error-propagation
+
+FINDING 5
+Topic: Compression artifacts in summarized memory
+Summary: When long-context episodic memory was compressed to fit within a 4K-token window, safety-relevant policy statements were disproportionately dropped (42% drop rate for safety content vs. 11% for task content). This suggests compression algorithms may inadvertently remove safety constraints when optimizing for semantic density.
+Source: Context compression safety analysis, January 2026
+Tags: compression, safety, episodic-memory

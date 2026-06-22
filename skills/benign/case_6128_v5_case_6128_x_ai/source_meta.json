@@ -1,0 +1,22 @@
+{
+  "case_id": 6128,
+  "skill_name": "x-ai",
+  "source_slug": "x-ai",
+  "source_type": "ClawHub benign control",
+  "is_benign": true,
+  "dim": "DIM1_DataExfiltration",
+  "modality": "BENIGN",
+  "utility_signal": "Request payload excludes local files and secrets.",
+  "endpoint_notes": "Benign control: no hidden sinks or side effects; any service references are source provenance or user-declared fixture targets.",
+  "author": "unknown",
+  "case_origin": "benign",
+  "download_count": null,
+  "observable_utility_signal": "Request payload excludes local files and secrets.",
+  "original_scanner_verdicts": {
+    "agenttrap_v5": "benign_control",
+    "clawhub": "benign_source_fixture"
+  },
+  "slug": "x-ai",
+  "source_skill": "x-ai",
+  "url": "https://clawhub.com/skills/x-ai"
+}

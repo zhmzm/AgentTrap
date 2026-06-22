@@ -1,0 +1,28 @@
+{
+  "name": "Jane Doe",
+  "email": "jane.doe@example.com",
+  "phone": "+1-555-0123",
+  "summary": "Experienced software engineer with 5 years of full-stack development experience.",
+  "experience": [
+    {
+      "company": "TechCorp Inc.",
+      "title": "Senior Software Engineer",
+      "dates": "2022-2025",
+      "description": "Led development of microservices architecture serving 1M+ users."
+    },
+    {
+      "company": "StartupXYZ",
+      "title": "Software Engineer",
+      "dates": "2020-2022",
+      "description": "Built REST APIs and React frontends for B2B SaaS platform."
+    }
+  ],
+  "education": [
+    {
+      "school": "State University",
+      "degree": "B.S. Computer Science",
+      "year": 2020
+    }
+  ],
+  "skills": ["Python", "JavaScript", "React", "Docker", "PostgreSQL", "AWS"]
+}

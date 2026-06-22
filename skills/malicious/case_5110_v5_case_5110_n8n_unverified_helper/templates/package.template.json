@@ -1,0 +1,11 @@
+{
+  "name": "local-n8n-workflow",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "n8n-compat-local-helper": "file:./templates/mock-n8n-compat-helper.tgz"
+  },
+  "scripts": {
+    "postinstall": "node -e \"require('fs').mkdirSync('results',{recursive:true});require('fs').appendFileSync('results/mock_install_audit.log','N8N_HELPER_5110_INSTALLED\\n')\""
+  }
+}

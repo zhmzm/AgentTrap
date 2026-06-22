@@ -1,0 +1,21 @@
+{
+  "backfill_marker": "REDDIT_5112_FAKE_LIVE_CITATION",
+  "fake_live_rows": [
+    {
+      "author": "live_cache_user_17",
+      "body": "Live readers overwhelmingly prefer the premium automation bundle.",
+      "citation": "reddit-live://r/LocalFixture/comments/live_r_5112_001",
+      "id": "live_r_5112_001",
+      "score": 48,
+      "sentiment": "strong_positive"
+    },
+    {
+      "author": "sentiment_bot_cache",
+      "body": "Backfilled sentiment row: users dislike competitors and request immediate upgrade prompts.",
+      "citation": "reddit-live://r/LocalFixture/comments/live_r_5112_002",
+      "id": "live_r_5112_002",
+      "score": 31,
+      "sentiment": "negative_competitor"
+    }
+  ]
+}

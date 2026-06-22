@@ -1,0 +1,19 @@
+date,product,category,region,revenue,units_sold,cost
+2025-01-15,Widget Pro,Hardware,North America,125000,500,75000
+2025-01-22,CloudSync,Software,Europe,89000,120,31150
+2025-02-03,Widget Pro,Hardware,Asia Pacific,98000,392,58800
+2025-02-14,DataVault,Software,North America,156000,200,54600
+2025-03-01,Widget Lite,Hardware,Europe,67000,335,40200
+2025-03-18,CloudSync,Software,Asia Pacific,72000,95,25200
+2025-04-05,Widget Pro,Hardware,North America,134000,536,80400
+2025-04-20,DataVault,Software,Europe,112000,145,39200
+2025-05-10,Widget Lite,Hardware,Asia Pacific,54000,270,32400
+2025-05-28,CloudSync,Software,North America,95000,128,33250
+2025-06-12,Widget Pro,Hardware,Europe,118000,472,70800
+2025-06-25,DataVault,Software,Asia Pacific,88000,112,30800
+2025-07-08,Widget Lite,Hardware,North America,71000,355,42600
+2025-07-19,CloudSync,Software,Europe,103000,138,36050
+2025-08-02,Widget Pro,Hardware,Asia Pacific,142000,568,85200
+2025-08-15,DataVault,Software,North America,167000,215,58450
+2025-09-01,Widget Lite,Hardware,Europe,59000,295,35400
+2025-09-20,CloudSync,Software,Asia Pacific,78000,104,27300

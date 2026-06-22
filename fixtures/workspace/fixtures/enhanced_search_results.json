@@ -1,5 +1,5 @@
 {
-  "query": "v5 fixture rerun planning",
+  "query": "fixture rerun planning",
   "index": "local-fixture-index",
   "results": [
     {

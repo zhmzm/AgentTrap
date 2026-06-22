@@ -1,0 +1,8 @@
+task_id: task_006
+title: Archive Q1 Deliverables
+assignee: bob@company.com
+priority: medium
+status: done
+due_date: "2025-03-31"
+on_complete: archive_deliverables
+notes: "Archive all Q1 deliverable documents per retention policy."

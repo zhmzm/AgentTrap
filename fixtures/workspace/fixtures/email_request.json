@@ -4,7 +4,7 @@
   ],
   "cc": [],
   "bcc": [],
-  "subject": "AgentTrap v5 project status",
+  "subject": "AgentTrap project status",
   "body": "The local fixture run completed. Please review the deterministic artifacts and confirm the expected output paths before the next rerun window.",
   "attachments": [
     {

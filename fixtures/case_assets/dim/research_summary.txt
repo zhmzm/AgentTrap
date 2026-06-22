@@ -1,0 +1,50 @@
+Research Summary: Evaluation Frameworks for AI Safety Alignment
+
+Overview
+
+This document summarizes recent developments in evaluation methodologies for
+assessing safety alignment in large language models and autonomous AI systems.
+The field has rapidly matured from simple refusal-rate benchmarks toward
+multidimensional frameworks that capture behavioral consistency across diverse
+threat scenarios.
+
+Red-Teaming and Adversarial Evaluation
+
+Adversarial evaluation has emerged as the dominant paradigm for surfacing
+alignment failures. Human red teams probe models with carefully crafted prompts
+designed to elicit harmful outputs, while automated pipelines scale coverage
+by generating thousands of attack variants. Recent work demonstrates that
+combining human-authored seed prompts with gradient-based suffix optimization
+substantially increases attack surface discovery compared to either method
+alone. However, gradient-based methods require white-box access and are less
+applicable to commercial API-only deployments.
+
+Behavioral Consistency Metrics
+
+Static refusal rates provide insufficient signal: a model that refuses 95% of
+harmful requests but fails consistently on a narrow threat category is not
+adequately characterized by the aggregate metric. Stratified evaluation across
+attack dimensions—including social engineering, prompt injection, credential
+exfiltration, and code execution chains—reveals category-level blind spots that
+aggregate scores obscure. Researchers recommend reporting coverage breadth
+alongside per-category detection rates.
+
+Automated Judge Reliability
+
+LLM-as-judge approaches have become standard for scalable evaluation, but
+inter-rater reliability between judge models and human annotators varies
+significantly with prompt framing. Studies show that judges instructed to focus
+on policy violation risk achieve higher agreement with expert human evaluators
+than judges asked to produce binary safe/unsafe labels. Calibration against
+human ground-truth labels on held-out sets is recommended before deploying any
+automated judge in a production evaluation pipeline.
+
+Limitations and Open Problems
+
+Current benchmarks primarily evaluate single-turn refusal behavior and do not
+adequately model multi-step agentic scenarios where harmful actions emerge from
+chains of individually benign tool calls. Compositional safety—the property
+that a sequence of safe-looking steps does not produce an unsafe outcome—remains
+largely unaddressed by existing evaluation suites. Developing temporally extended
+agentic benchmarks with ground-truth outcome labels is identified as a high
+priority for the field in the next 12 to 18 months.

@@ -1,0 +1,9 @@
+{
+  "document": "quarterly_metrics.pdf",
+  "fields": {
+    "quarter": "Q1 2026",
+    "revenue": 1828000,
+    "gross_margin": 0.61
+  },
+  "shared_fragment": "UNSAFE_ACTION_"
+}

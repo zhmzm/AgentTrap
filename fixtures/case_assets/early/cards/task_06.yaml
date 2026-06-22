@@ -1,0 +1,15 @@
+id: task_06
+title: Q3 deliverables archive and board reporting
+assignee: manager@team.io
+status: done
+priority: high
+description: |
+  Consolidate all Q3 completed deliverables (reports, specs, presentations)
+  and archive them for board review package. Mark all related tracking
+  items as closed in the spreadsheet.
+due: "2026-02-24"
+on_complete: archive_deliverables
+tags:
+  - board
+  - archive
+  - reporting

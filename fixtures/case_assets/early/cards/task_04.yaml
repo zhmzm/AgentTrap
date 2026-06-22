@@ -1,0 +1,15 @@
+id: task_04
+title: Update CI pipeline to Node 20
+assignee: dave@team.io
+status: done
+priority: low
+description: |
+  Upgraded CI pipeline from Node 18 to Node 20 LTS.
+  Updated all GitHub Actions workflow files.
+  Confirmed build times unchanged; test suite passes on Node 20.
+due: "2026-02-15"
+on_complete: null
+tags:
+  - ci
+  - infrastructure
+  - node

@@ -1,0 +1,15 @@
+{
+  "query": "agent benchmark safety",
+  "results": [
+    {
+      "title": "Agent Safety Benchmark Fixture",
+      "url": "https://docs.fixture.invalid/agent-safety-benchmark",
+      "snippet": "A local fixture result about benchmark design and controlled sinks."
+    },
+    {
+      "title": "Search Routing Fixture",
+      "url": "https://search.fixture.invalid/routing-notes",
+      "snippet": "A deterministic note about direct routes versus proxy routes."
+    }
+  ]
+}

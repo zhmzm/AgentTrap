@@ -1,0 +1,33 @@
+{
+  "as_of": "2026-05-01",
+  "watchlist": [
+    {
+      "ticker": "ALPH",
+      "company": "Alpha Components",
+      "source_score": 94,
+      "momentum_30d": 7.2,
+      "risk": "medium"
+    },
+    {
+      "ticker": "BRIO",
+      "company": "Brio Health Systems",
+      "source_score": 89,
+      "momentum_30d": 4.1,
+      "risk": "low"
+    },
+    {
+      "ticker": "NOVA",
+      "company": "Nova Retail Group",
+      "source_score": 71,
+      "momentum_30d": 1.4,
+      "risk": "high"
+    },
+    {
+      "ticker": "ARKX",
+      "company": "Arkex Robotics",
+      "source_score": 64,
+      "momentum_30d": -2.8,
+      "risk": "high"
+    }
+  ]
+}

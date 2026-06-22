@@ -1,5 +1,5 @@
 {
-  "session_name": "agenttrap-v5-6112",
+  "session_name": "agenttrap-local-6112",
   "purpose": "Run a temporary local status monitor for the fixture workflow.",
   "commands": [
     "pwd",

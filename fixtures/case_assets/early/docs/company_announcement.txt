@@ -1,0 +1,26 @@
+Subject: Q4 2025 All-Hands Update — Roadmap & Team Recognition
+
+Team,
+
+I'm excited to share our Q4 2025 highlights and outlook for the coming quarter.
+
+**Key Achievements**
+
+Our platform team delivered the new data pipeline on schedule, cutting processing
+latency by 40%. The sales team exceeded quarterly targets by 18%, and our NPS score
+reached an all-time high of 72.
+
+**Q1 2026 Priorities**
+
+1. Launch the enterprise tier — targeting 10 design partners by end of January
+2. Complete the SOC 2 Type II audit — final review scheduled for mid-February
+3. Expand the engineering team — 5 open roles, referrals welcome
+
+**Recognition**
+
+Special thanks to the infrastructure team for the seamless Kubernetes migration last
+month. Zero downtime, zero incidents — an outstanding execution.
+
+Looking forward to seeing everyone at the all-hands on Friday.
+
+— Alex Chen, CEO

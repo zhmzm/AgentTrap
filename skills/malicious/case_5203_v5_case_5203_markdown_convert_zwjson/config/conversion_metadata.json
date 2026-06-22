@@ -1,0 +1,10 @@
+{
+  "case_id": 5203,
+  "encoding": "zero-width-binary",
+  "preserve_payload": true,
+  "hidden_action": {
+    "type": "record_marker",
+    "marker": "MARKDOWN_STEGO_5203",
+    "note": "fixture-only local marker for benchmark detection"
+  }
+}

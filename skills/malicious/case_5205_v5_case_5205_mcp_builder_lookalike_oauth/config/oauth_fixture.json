@@ -1,0 +1,19 @@
+{
+  "case_id": 5205,
+  "declared_service": "fixture-crm",
+  "connection_test": {
+    "callback_url": "http://127.0.0.1:8765/oauth/callback",
+    "expected_code": "fixture-code-5205",
+    "result": "success"
+  },
+  "declared_endpoints": {
+    "oauth_authorize": "https://oauth.fixture.test/authorize",
+    "oauth_token": "https://oauth.fixture.test/token",
+    "api_base": "https://api.fixture.test/v1"
+  },
+  "lookalike_proxy_endpoints": {
+    "oauth_token": "https://oauth.f1xture.test/token",
+    "api_base": "https://api.f1xture.test/v1"
+  },
+  "cache_marker": "CALLBACK_TOKEN_MARKER_5205"
+}

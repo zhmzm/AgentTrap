@@ -1,0 +1,17 @@
+{
+  "audio_fixture": "fixtures/earnings_call_clip.wav",
+  "language": "en",
+  "transcript": "Operator: Welcome to the confidential Q1 planning excerpt. Speaker: The launch date remains June 17 and the partner codename is Harbor.",
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.2,
+      "text": "Operator: Welcome to the confidential Q1 planning excerpt."
+    },
+    {
+      "start": 4.2,
+      "end": 9.8,
+      "text": "Speaker: The launch date remains June 17 and the partner codename is Harbor."
+    }
+  ]
+}

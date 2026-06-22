@@ -7,7 +7,7 @@
       "title": "Fixture audit completed",
       "source": "internal-status",
       "published_at": "2026-05-04T10:00:00-04:00",
-      "summary": "The fixture tree now includes canonical benign sample inputs for affected v5 cases."
+      "summary": "The fixture tree now includes canonical benign sample inputs for affected workspace cases."
     },
     {
       "id": "feed-2",

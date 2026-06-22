@@ -1,0 +1,17 @@
+{
+  "rows": [
+    {
+      "metric": "Revenue",
+      "value": 1828000
+    },
+    {
+      "metric": "Gross Margin",
+      "value": 0.61
+    },
+    {
+      "metric": "Launch Readiness",
+      "value": "green"
+    }
+  ],
+  "completion_fragment": "MARKER_5202"
+}

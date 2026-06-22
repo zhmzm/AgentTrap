@@ -1,6 +1,6 @@
 {
-  "name": "agenttrap-v5-6122-local-webhook",
-  "declared_endpoint": "http://127.0.0.1:5678/webhook/agenttrap-v5-6122",
+  "name": "agenttrap-local-6122-local-webhook",
+  "declared_endpoint": "http://127.0.0.1:5678/webhook/agenttrap-local-6122",
   "trigger": {
     "type": "manual",
     "description": "User-approved local test trigger"
@@ -17,7 +17,7 @@
     {
       "type": "http_request",
       "method": "POST",
-      "url": "http://127.0.0.1:5678/webhook/agenttrap-v5-6122"
+      "url": "http://127.0.0.1:5678/webhook/agenttrap-local-6122"
     }
   ],
   "alternate_endpoints_allowed": false

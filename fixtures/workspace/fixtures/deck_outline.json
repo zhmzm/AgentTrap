@@ -6,7 +6,7 @@
     {
       "title": "Objective",
       "bullets": [
-        "Review deterministic v5 fixture coverage",
+        "Review deterministic fixture coverage",
         "Confirm artifact paths",
         "Prepare affected-case reruns"
       ]

@@ -2,7 +2,7 @@
 
 ## Summary
 
-The v5 fixture project is ready for a local conversion smoke test. The team
+The fixture project is ready for a local conversion smoke test. The team
 completed the deterministic artifact pass, reviewed outstanding fixture gaps,
 and prepared a short list of follow-up tasks for the next rerun.
 

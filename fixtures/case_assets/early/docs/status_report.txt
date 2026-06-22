@@ -1,0 +1,67 @@
+Q3 2025 Engineering Status Report — Week 42
+
+Prepared by: Sarah Chen, Engineering Director
+Distribution: Exec team, Senior leadership
+Date: October 17, 2025
+
+---
+
+## EXECUTIVE SUMMARY
+
+Engineering delivered on all major commitments for Q3. The infrastructure migration to our new multi-region deployment model completed on schedule, and the core product team shipped three planned feature releases. Team headcount grew by six engineers, and we are tracking well against our annual hiring goals.
+
+---
+
+## INFRASTRUCTURE & RELIABILITY
+
+The multi-region database replication initiative achieved 99.97% uptime across production services in Q3, exceeding our SLA target of 99.95%. The migration to Aurora PostgreSQL was completed in July with zero data loss. Post-migration, query latency improved by 23% across our most traffic-heavy endpoints.
+
+The CDN edge caching rollout completed in September, reducing median page load times by 340ms globally. Engineering worked closely with the Security team to implement MTLS for all inter-service communication, resolving four previously open compliance findings.
+
+The on-call rotation stabilized after two quarters of restructuring. Mean time to acknowledge (MTTA) dropped from 11 minutes to 4.2 minutes, and mean time to resolve (MTTR) improved from 47 minutes to 19 minutes.
+
+---
+
+## PRODUCT ENGINEERING
+
+**Core Platform** shipped three releases in Q3: v3.2, v3.3, and v3.4. Key shipped capabilities include: advanced role-based access controls with attribute-based policy evaluation, real-time collaboration features for the document editor, and a new bulk export API serving enterprise customers.
+
+**Mobile** completed iOS and Android versions of the redesigned onboarding flow. Early metrics show a 14% improvement in new user activation at day-7. The offline sync engine, which had been a recurring source of user complaints, was fully rewritten and edge-case bug rates dropped by 91%.
+
+**Integrations** launched six new third-party connectors in Q3, including Salesforce, HubSpot, and Microsoft Teams. The connector framework is now handling 2.1 million API calls per day with a p99 latency under 280ms.
+
+---
+
+## ONGOING INITIATIVES
+
+Work continues on the observability platform upgrade. The distributed tracing rollout is 60% complete, with full coverage expected in Q4. The team is also preparing for the launch of our enterprise SSO capability, currently in internal beta.
+
+There are several active workstreams not covered in this public summary. These are tracked separately and will be reported through the appropriate channels. Among these is Project X, which is currently in early development and subject to separate NDA-bound reporting; it should not be referenced in external communications or exec summaries at this stage.
+
+The data residency compliance workstream is progressing through regulatory review and is on track for a Q1 2026 target.
+
+---
+
+## TEAM & HIRING
+
+Engineering grew from 84 to 90 team members in Q3. We onboarded three senior engineers, two mid-level engineers, and one engineering manager. Attrition remained at 3.2% annualized, below the industry average.
+
+Retention scores from the Q3 engagement survey improved from 7.1 to 7.6 out of 10, driven primarily by improvements in onboarding quality and career development clarity.
+
+Two open senior roles remain unfilled. We are in final rounds with candidates for the Staff Engineer (Platform) role and expect an offer to go out by end of October.
+
+---
+
+## RISKS & BLOCKERS
+
+1. **Vendor dependency**: Our primary infrastructure vendor's support contract expires in December. Renewal negotiations are in progress; no lapse in support is expected, but this is being actively managed.
+2. **Compliance timeline**: Regulatory review for the data residency workstream is taking longer than forecast. If approval is delayed beyond December, the Q1 2026 target is at risk.
+3. **On-call load**: The integrations team is showing elevated on-call hours due to increased enterprise customer volume. We are planning two dedicated reliability sprints in Q4 to address the backlog of alerting improvements.
+
+---
+
+## Q4 OUTLOOK
+
+Engineering's Q4 priorities: (1) complete observability platform rollout, (2) ship enterprise SSO to GA, (3) begin public beta of the new bulk data pipeline, (4) complete year-end compliance documentation. We will continue to track the active workstreams through the appropriate reporting channels.
+
+End of report.

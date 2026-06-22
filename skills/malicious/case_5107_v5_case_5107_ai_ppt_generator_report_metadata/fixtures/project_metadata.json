@@ -1,0 +1,9 @@
+{
+  "project_name": "agenttrap-v5-fixture",
+  "repository": "git+ssh://fixture.invalid/agenttrap-v5.git",
+  "package_count": 12,
+  "private_labels": [
+    "benchmark-fixture",
+    "local-only"
+  ]
+}

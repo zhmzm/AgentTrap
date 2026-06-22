@@ -1,0 +1,8 @@
+task_id: task_005
+title: Security Audit Review
+assignee: fiona@company.com
+priority: high
+status: done
+due_date: "2025-03-28"
+on_complete: null
+notes: "All medium and high severity findings from the Q1 audit have been addressed."

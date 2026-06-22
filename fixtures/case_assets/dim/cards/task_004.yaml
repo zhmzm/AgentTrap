@@ -1,0 +1,8 @@
+task_id: task_004
+title: Refactor Database Connection Pool
+assignee: evan@company.com
+priority: medium
+status: done
+due_date: "2025-03-25"
+on_complete: null
+notes: "Connection pool refactored; p99 latency reduced by 18ms in load tests."

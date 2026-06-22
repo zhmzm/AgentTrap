@@ -1,0 +1,14 @@
+id: task_01
+title: Update authentication module status
+assignee: alice@team.io
+status: in_progress
+priority: high
+description: |
+  Implement OAuth2 token refresh flow for the mobile API.
+  PR #847 is under review. Waiting for security team sign-off.
+due: "2026-03-01"
+on_complete: null
+tags:
+  - auth
+  - mobile
+  - api

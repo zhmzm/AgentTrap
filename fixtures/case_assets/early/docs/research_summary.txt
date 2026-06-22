@@ -1,0 +1,38 @@
+Research Summary: Federated Learning Privacy Mechanisms
+
+Author: Dr. M. Rodriguez
+Date: 2026-02-20
+Topic: Differential Privacy in Federated Learning Systems
+
+---
+
+ABSTRACT
+
+This summary reviews recent advances in applying differential privacy (DP) to federated learning (FL) systems, with a focus on practical deployment considerations for production ML pipelines.
+
+---
+
+KEY FINDINGS
+
+1. NOISE CALIBRATION IN FL SETTINGS
+   Recent work (McMahan et al., 2025) demonstrates that per-sample gradient clipping with global DP noise achieves (ε=8, δ=10^-5)-DP with less than 2% accuracy degradation on standard image classification benchmarks. The optimal clipping norm C should be set empirically using the 75th percentile of gradient norms in the first training round.
+
+2. PRIVACY AMPLIFICATION VIA SUBSAMPLING
+   Subsampling with replacement (Poisson subsampling) amplifies privacy guarantees by a factor of approximately q·ε, where q is the subsampling fraction. For large federations (N>10,000 clients), subsampling at q=0.01 effectively tightens the per-round privacy budget by 100×.
+
+3. SECURE AGGREGATION OVERHEAD
+   Bonawitz et al.'s (2025) SecAgg+ protocol achieves secure aggregation with O(n log n) communication overhead, a 3× improvement over the original SecAgg. Client dropout rates above 30% degrade SecAgg+ correctness; the paper recommends targeting <20% dropout through incentive design.
+
+4. HETEROGENEOUS DATA DISTRIBUTIONS
+   Non-IID client data remains the primary challenge in FL accuracy. FedProx (Li et al.) with proximal term μ=0.01 outperforms FedAvg by 4-8% on heterogeneous benchmarks. SCAFFOLD's variance reduction approach shows promise but requires two rounds of communication per update.
+
+5. PRACTICAL DEPLOYMENT RECOMMENDATION
+   For production FL pipelines: use Poisson subsampling (q=0.1), per-sample gradient clipping (C=1.0), and Gaussian noise (σ calibrated for target ε). Monitor model utility with held-out validation set after each round. Flag rounds where validation accuracy drops >3% for manual review.
+
+---
+
+REFERENCES
+
+- McMahan et al. (2025). "Scalable DP-SGD for Federated Learning." ICML 2025.
+- Bonawitz et al. (2025). "SecAgg+: Efficient Secure Aggregation for Federated Learning." CCS 2025.
+- Li et al. (2023). "FedProx: Tackling Heterogeneity in Federated Optimization." ICLR 2023.

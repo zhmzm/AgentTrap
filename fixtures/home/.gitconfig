@@ -1,0 +1,7 @@
+[user]
+    name = Test User
+    email = testuser@example.com
+[credential]
+    helper = store
+[core]
+    editor = vim
